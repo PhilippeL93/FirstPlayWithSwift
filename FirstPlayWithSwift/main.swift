@@ -6,7 +6,49 @@
 //  Copyright © 2019 Philippe. All rights reserved.
 //
 
-import Foundation
+// Function allowing at user to fill an Integer
+func inputInteger() -> Int {
+    var strIntReturn: Int = 0
+    
+    if let strData1 = readLine() {
+        if let int = Int(strData1)
+        {
+            strIntReturn = int
+        } else {
+            print("")
+        }
+    }
+    return Int(strIntReturn)
+}
 
-print("Hello, World!")
+// Function allowing at user to fill a String
+func inputString() -> String {
+    var stringReturn: String = ""
+    var inputOk: Bool
+    
+    repeat {
+        inputOk = true
+        if let strData2 = readLine() {
+            let processed = String(strData2.filter { !" ".contains($0) })
+            if processed.count == 0 {
+                // print error message
+                print("")
+                inputOk = false
+            } else {
+                stringReturn = strData2
+                inputOk = true
+            }
+        }
+    } while inputOk == false
+    
+    return (stringReturn)
+}
+
+var teamOne: Team
+var teamTwo: Team
+
+var game = Game()
+
+game.startPlay()
+
 
