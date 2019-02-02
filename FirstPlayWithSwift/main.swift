@@ -15,6 +15,7 @@ func inputInteger() -> Int {
         {
             strIntReturn = int
         } else {
+            print(Errors.selectANumber.rawValue)
             print("")
         }
     }
@@ -33,6 +34,7 @@ func inputString() -> String {
             if processed.count == 0 {
                 // print error message
                 print("")
+                print(Errors.nameEmpty.rawValue)
                 inputOk = false
             } else {
                 stringReturn = strData2
