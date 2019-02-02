@@ -7,9 +7,10 @@
 //
 
 
-class Hypnotise:Weapon {
+class Hypnotiseur: AvatarType {
     init() {
-        super.init(damage: 20, attack: true)
+        super.init(life: 80,weapon: Hypnotise())
     }
+
 }
 
