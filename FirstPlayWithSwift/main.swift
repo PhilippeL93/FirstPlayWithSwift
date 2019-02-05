@@ -51,6 +51,7 @@ var teamTwo: Team
 
 var game = Game()
 
-game.startPlay()
+//game.startPlay()
+game.start()
 
 

@@ -9,110 +9,91 @@
 
 class Game {
     
+    var teamA: Team?
+    var teamB: Team?
+    var teamToPlay: Team?
+    
     init() {
+//        print("Initializer called")
+    }
+    
+    func start() {
+        print("Jeu de combat entre deux équipes")
+        
+        createTeams()
         
     }
     
-    func startPlay() {
+    func createTeams() {
         
-        print("Jeu de combat entre deux équipes")
+        // Create team A
+        let teamNameOne = askUserForTeamsName(teamNumber: "Première")
+        teamA = createTeam(name: teamNameOne)
+        if teamA == nil {
+            print("An error occured when creating the team \(teamNameOne). Game Quit.")
+            fatalError()
+        }
+        createFightersForTeam(team: teamA!, teamNumber: "Première")
         
-        //      choice of name of first team
-        var teamNumber = "Première"
-        let teamNameOne = askUserForTeamsName(teamNumber: teamNumber)
-        
-        //      create of first team
-        teamOne = createTeam(name: teamNameOne)
-        
-        //      choice of type for first avatar
-        var avatarNumber = "premier"
-        let avatarTypeOneOne = fillUpAvatarType(teamNameDisplay: teamNameOne, avatarNumber: avatarNumber)
-
-        //      choice of name for first avatar
-        let avatarNameOneOne = askUserForAvatarName(teamNumber: teamNumber)
-        
-        //      create first avatar in first team
-        let avatarOneOne = Avatar(avatarName: avatarNameOneOne, avatarType: avatarTypeOneOne)
-        
-        teamOne.addAvatar(avatar: avatarOneOne)
-        
-        //      choice of type for second avatar
-        avatarNumber = "deuxième"
-        let avatarTypeTwoOne = fillUpAvatarType(teamNameDisplay: teamNameOne, avatarNumber: avatarNumber)
-        
-        //      choice of name for second avatar
-        let avatarNameTwoOne = askUserForAvatarName(teamNumber: teamNumber)
-        
-        //      create second avatar in first team
-        let avatarTwoOne = Avatar(avatarName: avatarNameTwoOne, avatarType: avatarTypeTwoOne)
-        
-        teamOne.addAvatar(avatar: avatarTwoOne)
-        
-        //      choice of type for third avatar
-        avatarNumber = "troisième"
-        let avatarTypeThreeOne = fillUpAvatarType(teamNameDisplay: teamNameOne, avatarNumber: avatarNumber)
-                
-        //      choice of name for third avatar
-        let avatarNameThreeOne = askUserForAvatarName(teamNumber: teamNumber)
-        
-        //      create third avatr in first team
-        let avatarThreeOne = Avatar(avatarName: avatarNameThreeOne, avatarType: avatarTypeThreeOne)
-        
-        teamOne.addAvatar(avatar: avatarThreeOne)
-        
-        print("Equipe \(teamNameOne) est complète")
-        
-        teamOne.printAvatar()
-
-        
-        //      choice name of second team
-        teamNumber = "Deuxième"
-        let teamNameTwo = askUserForTeamsName(teamNumber: teamNumber)
-        
-        //      create second team
-        teamTwo = createTeam(name: teamNameTwo)
-        
-        //      choice of type for first avatar
-        avatarNumber = "premier"
-        let avatarTypeOneTwoo = fillUpAvatarType(teamNameDisplay: teamNameTwo, avatarNumber: avatarNumber)
-        
-        //      choice of name for first avatar
-        let avatarNameOneTwo = askUserForAvatarName(teamNumber: teamNumber)
-        
-        //      create first avatar in second team
-        let avatarOneTwo = Avatar(avatarName: avatarNameOneTwo, avatarType: avatarTypeOneTwoo)
-        
-        teamTwo.addAvatar(avatar: avatarOneTwo)
-        
-        //      choice of type for second avatar
-        avatarNumber = "deuxième"
-        let avatarTypeTwoTwo = fillUpAvatarType(teamNameDisplay: teamNameTwo, avatarNumber: avatarNumber)
-        
-        //      choice of name for second avatar
-        let avatarNameTwoTwo = askUserForAvatarName(teamNumber: teamNumber)
-        
-        //      create second avatar in second team
-        let avatarTwoTwo = Avatar(avatarName: avatarNameTwoTwo, avatarType: avatarTypeTwoTwo)
-        
-        teamTwo.addAvatar(avatar: avatarTwoTwo)
-        
-        //      choice of type for third avatar
-        avatarNumber = "troisième"
-        let avatarTypeThreeTwo = fillUpAvatarType(teamNameDisplay: teamNameTwo, avatarNumber: avatarNumber)
-        
-        //      choice of name for third avatar
-        let avatarNameThreeTwo = askUserForAvatarName(teamNumber: teamNumber)
-        
-        //      create third avatr in second team
-        let avatarThreeTwo = Avatar(avatarName: avatarNameThreeTwo, avatarType: avatarTypeThreeTwo)
-        
-        teamTwo.addAvatar(avatar: avatarThreeTwo)
-        
-        print("Equipe \(teamNameTwo) est complète")
-        teamTwo.printAvatar()
-
-        
+        // Create team B
+        let teamNameTwo = askUserForTeamsName(teamNumber: "Deuxième")
+        teamB = createTeam(name: teamNameTwo)
+        if teamB == nil {
+            print("An error occured when creating the team \(teamNameTwo). Game Quit.")
+            fatalError()
+        }
+        createFightersForTeam(team: teamB!, teamNumber: "Deuxième")
     }
+    
+    func createFightersForTeam(team: Team, teamNumber : String) {
+        
+        var avatarNumber: String = ""
+        let teamUsed = Team.self
+        var teamName: String = ""
+        
+        switch teamNumber {
+        case "Première":
+            teamName = teamA!.teamName
+        case "Deuxième":
+            teamName = teamB!.teamName
+        default:
+            break
+        }
+        
+        let teamNumber = teamNumber
+        
+        for index in 1...3 {
+            switch index {
+            case 1:
+                avatarNumber = "premier"
+            case 2:
+                avatarNumber = "deuxième"
+            case 3:
+                avatarNumber = "troisième"
+            default:
+                break
+            }
+            //      choice of avatar type
+            let avatarType = fillUpAvatarType(teamNameDisplay: teamName, avatarNumber: avatarNumber)
+            
+            //      choice of avatar name
+            let avatarName = askUserForAvatarName(teamNumber: teamNumber)
+            
+            //      create avatar team
+            let avatarUsed = Avatar(avatarName: avatarName, avatarType: avatarType)
+            
+            switch teamNumber {
+            case "Première":
+                teamA!.addAvatar(avatar: avatarUsed)
+            case "Deuxième":
+                teamB!.addAvatar(avatar: avatarUsed)
+            default:
+                break
+            }
+        }
+    }
+    
+    
     
     func askUserForTeamsName(teamNumber: String) -> String{
         var playerName: String = " "
@@ -129,7 +110,6 @@ class Game {
     func createTeam(name: String) -> Team {
         
         let team = Team(teamName: name)
-        print(team)
         
         return team
     }
@@ -153,28 +133,28 @@ class Game {
             answer = inputInteger()
         } while answer != 1 && answer != 2 && answer != 3 && answer != 4
         
-            switch answer {
-            case 1:
-                avatarType = Combattant()
-            case 2:
-                avatarType = Mage()
-            case 3:
-                avatarType = Colosse()
-            case 4:
-                avatarType = Nain()
-            case 5:
-                avatarType = Hypnotiseur()
-            default:
-                break
-            }
-            
-            return avatarType!    }
+        switch answer {
+        case 1:
+            avatarType = Combattant()
+        case 2:
+            avatarType = Mage()
+        case 3:
+            avatarType = Colosse()
+        case 4:
+            avatarType = Nain()
+        case 5:
+            avatarType = Hypnotiseur()
+        default:
+            break
+        }
+        
+        return avatarType!    }
     
     
     func askUserForAvatarName(teamNumber: String) -> String {
         var avatarName: String
         var nameFound: Bool
-        var checkForDoublons = false
+        var checkForDuplicates = true
         let teamNumber = teamNumber
         
         print("")
@@ -183,20 +163,19 @@ class Game {
         repeat {
             nameFound = true
             avatarName = inputString()
-            
             switch teamNumber {
-                case "Première" :
-                    checkForDoublons = teamOne.checkForDuplicate(avatarName: avatarName)
-                case "Deuxième" :
-                    checkForDoublons = teamOne.checkForDuplicate(avatarName: avatarName)
-                    if checkForDoublons == true {
-                        checkForDoublons = teamTwo.checkForDuplicate(avatarName: avatarName)
-                    }
-                default:
-                    break
+            case "Première" :
+                checkForDuplicates = teamA!.checkForDuplicate(avatarName: avatarName)
+            case "Deuxième" :
+                checkForDuplicates = teamA!.checkForDuplicate(avatarName: avatarName)
+                if checkForDuplicates == true {
+                    checkForDuplicates = teamB!.checkForDuplicate(avatarName: avatarName)
+                }
+            default:
+                break
             }
-    
-            if checkForDoublons == false {
+            
+            if checkForDuplicates == false {
                 // Gestion d'erreur
                 print("")
                 print(Errors.avatarNameAllReadyExist.rawValue)
@@ -206,6 +185,5 @@ class Game {
         
         return avatarName
     }
-    
-    
+
 }

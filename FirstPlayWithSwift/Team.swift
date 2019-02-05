@@ -27,7 +27,7 @@ class Team {
     func checkForDuplicate(avatarName: String) -> Bool {
         
         for item in arrayAvatars {
-            print("premeir")
+            print("premier")
             print(item.avatarName)
             if item.avatarName == avatarName {
                 return false
