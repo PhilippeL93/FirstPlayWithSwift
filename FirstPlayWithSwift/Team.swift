@@ -27,8 +27,6 @@ class Team {
     func checkForDuplicate(avatarName: String) -> Bool {
         
         for item in arrayAvatars {
-            print("premier")
-            print(item.avatarName)
             if item.avatarName == avatarName {
                 return false
             }
@@ -51,12 +49,93 @@ class Team {
                 } else {
                     weaponType = "Soigne"
                 }
-                
                 print("Personnage : \(item.avatarName), \(item.avatarType)", " - Arme : \(item.weapon)", " - Points de vie : \(item.life)", " - action : \(weaponType)")
-                print(item.avatarType)
             }
         }
         print("")
     }
+    
+    
+    func attack(teamAgainst: Team) {
 
+        var typeCall: String
+        var description: String
+        var teamFrom: Team
+        let teamAgainst = teamAgainst
+        
+        teamFrom = self
+        
+        print("from \(teamFrom)")
+        print("against \(teamAgainst)")
+        
+        typeCall = "Fighter"
+        description = "Equipe \(self.teamName) avec quel personnage voulez-vous attaquer ?"
+        let fighter = self.choiceAvatar(team: teamFrom, description: description, typeCall: typeCall)
+//        let fighter = self.choiceAvatar(description: description, typeCall: typeCall)
+        print("retour function fighter  \(fighter)")
+        
+        typeCall  = "Adversary"
+        description = "Equipe \(self.teamName), Quel personnage voulez-vous attaquer ?"
+        let adversary = self.choiceAvatar(team: teamAgainst, description: description, typeCall: typeCall)
+//        let adversary = choiceAvatar(description: description, typeCall: typeCall)
+        print("retour function Adversaire  \(adversary)")
+        
+        
+        
+        
+    }
+    
+//    func choiceAvatar(description: String, typeCall: String) -> Int {
+    
+    func choiceAvatar(team: Team, description: String, typeCall: String) -> Int {
+        var userChoice: Int
+        var numberOfAvatarInit: Int = 0
+        var numberOfAvatarSelect: Int = 0
+        let teamSelect = team
+        var arrayAvatars = [1: 0, 2: 0, 3:0]
+        var avatarSelected: Int = 0
+        let description = description
+        let typeCall = typeCall
+        
+        print("")
+        print(description)
+        print("")
+        
+//        for item in teamSelect.arrayAvatars {
+        for item in teamSelect.arrayAvatars {
+            numberOfAvatarInit += 1
+            if typeCall == "Fighter" {
+                if item.life > 0 && item.attack == true {
+                    numberOfAvatarSelect += 1
+                    print("\(numberOfAvatarSelect) - \(item.avatarName)  \(item.avatarType)", " - Arme : \(item.weapon)", " - Points de vie : \(item.life)")
+                    //                arrayAvatarsChoice.append(item.avatarType)
+                    arrayAvatars[numberOfAvatarInit]! += numberOfAvatarSelect
+                }
+            } else
+            {
+                if item.life > 0 {
+                    numberOfAvatarSelect += 1
+                    print("\(numberOfAvatarSelect) - \(item.avatarName)  \(item.avatarType)", " - Arme : \(item.weapon)", " - Points de vie : \(item.life)")
+                    //                arrayAvatarsChoice.append(item.avatarType)
+                    arrayAvatars[numberOfAvatarInit]! += numberOfAvatarSelect
+                }
+            }
+        }
+        print("")
+        // On boucle tant qu'il n'a pas choisi qui est attaqué
+        repeat {
+            userChoice = inputInteger()
+            print("")
+        } while userChoice < 1 || userChoice > numberOfAvatarSelect
+        
+        for item in arrayAvatars {
+            if item.value == userChoice {
+                avatarSelected = item.key
+            }
+        }
+        return avatarSelected
+        
+    }
+    
+    
 }

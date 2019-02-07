@@ -12,9 +12,10 @@ class Game {
     var teamA: Team?
     var teamB: Team?
     var teamToPlay: Team?
+    var teamNotPlay: Team?
     
     init() {
-//        print("Initializer called")
+
     }
     
     func start() {
@@ -22,33 +23,50 @@ class Game {
         
         createTeams()
         
+        launchFight()
+        
     }
     
     func createTeams() {
         
         // Create team A
-        let teamNameOne = askUserForTeamsName(teamNumber: "Première")
-        teamA = createTeam(name: teamNameOne)
+        let teamNameA = askUserForTeamsName(teamNumber: "Première")
+        teamA = createTeam(name: teamNameA)
         if teamA == nil {
-            print("An error occured when creating the team \(teamNameOne). Game Quit.")
+            print("An error occured when creating the team \(teamNameA). Game Quit.")
             fatalError()
         }
         createFightersForTeam(team: teamA!, teamNumber: "Première")
         
+        print("Equipe \(teamNameA) est complète")
+        
+        teamA!.printAvatar()
+        
         // Create team B
-        let teamNameTwo = askUserForTeamsName(teamNumber: "Deuxième")
-        teamB = createTeam(name: teamNameTwo)
+        let teamNameB = askUserForTeamsName(teamNumber: "Deuxième")
+        teamB = createTeam(name: teamNameB)
         if teamB == nil {
-            print("An error occured when creating the team \(teamNameTwo). Game Quit.")
+            print("An error occured when creating the team \(teamNameB). Game Quit.")
             fatalError()
         }
         createFightersForTeam(team: teamB!, teamNumber: "Deuxième")
+        
+        print("Equipe \(teamNameB) est complète")
+        
+        teamB!.printAvatar()
+    }
+    
+    
+    func createTeam(name: String) -> Team {
+        
+        let team = Team(teamName: name)
+        
+        return team
     }
     
     func createFightersForTeam(team: Team, teamNumber : String) {
         
         var avatarNumber: String = ""
-        let teamUsed = Team.self
         var teamName: String = ""
         
         switch teamNumber {
@@ -94,26 +112,6 @@ class Game {
     }
     
     
-    
-    func askUserForTeamsName(teamNumber: String) -> String{
-        var playerName: String = " "
-        let teamNumber = teamNumber
-        
-        print("")
-        print("\(teamNumber) équipe, veuillez entrer votre nom?")
-        
-        playerName = inputString()
-        
-        return playerName
-    }
-    
-    func createTeam(name: String) -> Team {
-        
-        let team = Team(teamName: name)
-        
-        return team
-    }
-    
     func fillUpAvatarType(teamNameDisplay: String,  avatarNumber: String) ->   AvatarType {
         var answer: Int
         let teamNameDisplay = teamNameDisplay
@@ -148,7 +146,8 @@ class Game {
             break
         }
         
-        return avatarType!    }
+        return avatarType!
+    }
     
     
     func askUserForAvatarName(teamNumber: String) -> String {
@@ -185,5 +184,43 @@ class Game {
         
         return avatarName
     }
+    
+    func askUserForTeamsName(teamNumber: String) -> String{
+        var playerName: String = " "
+        let teamNumber = teamNumber
+        
+        print("")
+        print("\(teamNumber) équipe, veuillez entrer votre nom?")
+        
+        playerName = inputString()
+        
+        return playerName
+    }
+    
+    func launchFight() {
+        
+         changeTeamToPlay()
 
+//        if teamToPlay == nil {
+//
+//        }else {
+
+        teamToPlay?.attack(teamAgainst : teamNotPlay!)
+//
+        
+        
+    }
+    
+    
+    func changeTeamToPlay() {
+        if teamToPlay === teamA! {
+            teamToPlay = teamB!
+            teamNotPlay = teamA!
+        } else {
+            teamToPlay = teamA!
+            teamNotPlay = teamB!
+        }
+    }
+    
+    
 }
