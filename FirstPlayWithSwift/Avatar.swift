@@ -36,5 +36,24 @@ class Avatar {
             break
         }
     }
+    
+    func attackAvatar(avatar: Avatar) {
+        print("attackAvatar")
+        print(self.weapon.damage)
+        print(self.avatarName)
+        avatar.receiveDamage(damage: self.weapon.damage)
+    }
+    
+    func receiveDamage(damage: Int) {
+        self.life = self.life - damage
+        print("receiveDamage")
+        print(self.life)
+        print(self.avatarName)
+        // If life is negatif, put to 0 in order avatar dead
+        if self.life < 0 {
+            self.life = 0
+            
+        }
+    }
 
 }
