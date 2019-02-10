@@ -11,6 +11,7 @@ class Avatar {
     var avatarName: String
     let avatarType : AvatarType
     var life: Int
+    var lifeInitial: Int
     var attack: Bool
     var weapon: Weapon
     
@@ -19,6 +20,7 @@ class Avatar {
         self.avatarType = avatarType
         self.weapon = avatarType.weapon
         self.life = avatarType.life
+        self.lifeInitial = avatarType.life
         self.attack = true
         
         switch self.avatarType {
@@ -38,18 +40,12 @@ class Avatar {
     }
     
     func attackAvatar(avatar: Avatar) {
-        print("attackAvatar")
-        print(self.weapon.damage)
-        print(self.avatarName)
         avatar.receiveDamage(damage: self.weapon.damage)
     }
     
     func receiveDamage(damage: Int) {
-        self.life = self.life - damage
-        print("receiveDamage")
-        print(self.life)
-        print(self.avatarName)
         // If life is negatif, put to 0 in order avatar dead
+        self.life = self.life - damage
         if self.life < 0 {
             self.life = 0
             
