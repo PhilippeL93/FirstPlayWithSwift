@@ -22,36 +22,81 @@ class Game {
         
         rulesGame()
         
-        createTeams()
+        var newGame: Bool = true
         
-        launchFight()
-        
-        //        displayWinner()
-        
-    }
+        while newGame == true {
+
+            createTeams()
+            
+            launchFight()
+
+            //        displayWinner()
+            
+            newGame = choiceOfNewGame()
+            }
+        }
+
+    
     
     func rulesGame () {
+        
+        print("-------------------------------------------------------------------------------------------------------")
+        print("")
         print("Jeu de combat entre deux équipes")
         print("")
-        print("Les règles du jeu sont les suivantes.")
+        print("Règles du jeu.")
         print("")
         print("Vous allez constituer chacun votre tour une équipe de 3 personnages,")
         print("pour cela vous allez devoir choisir parmi 4 propositions.")
-        print("Parmi ces 4 personnages il y a un mage qui a pour rôle de soigner l'un ")
+        print("Parmi ces 5 personnages il y a un mage qui a pour rôle de soigner l'un ")
         print("de vos combattants, il ne peux pas attaquer.")
         print("")
         print("Les personnages disponibles sont:")
         print("- le combattant, 90 points de vie, armé d'une épée enlevant 10 points de vie à l'adversaire")
         print("- le mage, 110 points de vie, pouvant soigner un membre de son équipe en lui redonnant 5 points de vie")
-        print("- le colosse, 125 points de vie, armé d'une masse enlevant 5 points de vie à l'adversaire ")
+        print("- le colosse, 125 points de vie, armé d'une masse enlevant 8 points de vie à l'adversaire ")
         print("- le nain, 50 points de vie, armé d'une hache enlevant 15 points de vie à l'adversaire ")
+        print("- l'hypnotiseur, 80 points de vie, pouvoir d'hypnotiser enlevant 12 points de vie à l'adversaire")
         print("")
-        print("Une fois les équipes constituées, vous allez jouer chacun votre tour en \rchoississant soit :")
-        print("- d'attaquer l'équipe adverse")
-        print("- de soigner un personnage de votre équipe")
+        print("Une fois les équipes constituées, vous allez jouer chacun votre tour en choississant :")
+        print("- soit d'attaquer l'équipe adverse")
+        print("- soit de soigner un personnage de votre équipe")
+        print("")
+        print("Il n'est possible de soigner un personnage de son équipe que si il a déjà perdu des points de vie.")
+        print("Un personnage soigné ne peut pas avoir plus de points de vie qu'il en avait initialement.")
+        print("")
+        print("Aléatoirement pourra apparaître un coffre contenant une nouvelle arme qui remplacera celle du personnage en question.")
+        print("- Si il s'agit du mage, son pouvoir de guérison sera augmenté de 5 points")
+        print("- Sinon, l'arme et le l'attaque du personnage concerné seront changées de façon aléatoire soit par :")
+        print("     - un sabre enlevant 11 point de vie")
+        print("     - une lance enlevant 8 point de vie")
+        print("     - un sceptre enlevant 8 points de vie")
+        print("     - un arc enlevant 12 points de vie")
+        print("     - une dague enlevant 8 points de vie")
         print("")
         print("Le jeu se termine lorsque les personnages d'une équipe ont tous perdu la vie? ")
         print("")
+        print("-------------------------------------------------------------------------------------------------------")
+    }
+    
+    func choiceOfNewGame() -> Bool {
+        
+        var answerForNewGame: String
+        
+        print("")
+        print("Voulez-vous faire une nouvelle partie?")
+        
+        repeat {
+            print("Répondre par Oui ou par Non.")
+            answerForNewGame = inputString()
+            print()
+        } while answerForNewGame != "Oui" && answerForNewGame != "Non"
+        
+        if answerForNewGame == "Oui" {
+            return true
+        } else {
+            return false
+        }
     }
     
     func createTeams() {
@@ -60,7 +105,7 @@ class Game {
         let teamNameA = askUserForTeamsName(teamNumber: "Première")
         teamA = createTeam(name: teamNameA)
         if teamA == nil {
-            print("An error occured when creating the team \(teamNameA). Game Quit.")
+            print("Première \(Errors.teamEmpty.rawValue)")
             fatalError()
         }
         createFightersForTeam(team: teamA!, teamNumber: "Premier")
@@ -73,7 +118,7 @@ class Game {
         let teamNameB = askUserForTeamsName(teamNumber: "Deuxième")
         teamB = createTeam(name: teamNameB)
         if teamB == nil {
-            print("An error occured when creating the team \(teamNameB). Game Quit.")
+            print("Deuxième \(Errors.teamEmpty.rawValue)")
             fatalError()
         }
         createFightersForTeam(team: teamB!, teamNumber: "Deuxième")
@@ -155,8 +200,9 @@ class Game {
             print("2 Mage")
             print("3 Colosse")
             print("4 Nain")
+            print("5 Hypnotiseur")
             answer = inputInteger()
-        } while answer != 1 && answer != 2 && answer != 3 && answer != 4
+        } while answer < 1 || answer > 5
         
         switch answer {
         case 1:
@@ -172,7 +218,6 @@ class Game {
         default:
             break
         }
-        
         return avatarType!
     }
     
@@ -302,6 +347,46 @@ class Game {
         } else {
             return "attack"
         }
+    }
+   
+    // Function allowing at user to fill an Integer
+    func inputInteger() -> Int {
+        var strIntReturn: Int = 0
+        
+        if let strData1 = readLine() {
+            if let int = Int(strData1)
+            {
+                strIntReturn = int
+            } else {
+                print(Errors.selectANumber.rawValue)
+                print("")
+            }
+        }
+        return Int(strIntReturn)
+    }
+    
+    // Function allowing at user to fill a String
+    func inputString() -> String {
+        var stringReturn: String = ""
+        var inputOk: Bool
+        
+        repeat {
+            inputOk = true
+            if let strData2 = readLine() {
+                let processed = String(strData2.filter { !" ".contains($0) })
+                if processed.count == 0 {
+                    // print error message
+                    print("")
+                    print(Errors.nameEmpty.rawValue)
+                    inputOk = false
+                } else {
+                    stringReturn = strData2
+                    inputOk = true
+                }
+            }
+        } while inputOk == false
+        
+        return (stringReturn)
     }
     
 }

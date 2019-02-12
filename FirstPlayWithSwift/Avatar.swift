@@ -48,7 +48,6 @@ class Avatar {
         self.life = self.life - damage
         if self.life < 0 {
             self.life = 0
-            
         }
     }
 

@@ -8,6 +8,6 @@
 
 class Epee:Weapon {
     init() {
-        super.init(damage: 10, attack: true)
+        super.init(damage: 10, attack: true, weaponName: "epée")
     }
 }

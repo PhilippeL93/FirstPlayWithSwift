@@ -8,6 +8,6 @@
 
 class Soigne:Weapon {
     init() {
-        super.init(damage: 5, attack: false)
+        super.init(damage: 5, attack: false, weaponName: "soins")
     }
 }

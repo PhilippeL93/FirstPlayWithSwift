@@ -9,10 +9,12 @@
 class Weapon {
     var damage: Int
     var attack: Bool
+    var weaponName: String
     
-    init(damage: Int, attack: Bool) {
+    init(damage: Int, attack: Bool, weaponName: String) {
         self.damage = damage
         self.attack = true
+        self.weaponName = weaponName
     }
     
 }

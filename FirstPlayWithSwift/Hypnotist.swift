@@ -9,7 +9,7 @@
 
 class Hypnotise:Weapon {
     init() {
-        super.init(damage: 20, attack: true)
+        super.init(damage: 12, attack: true, weaponName: "hypnotise")
     }
 }
 

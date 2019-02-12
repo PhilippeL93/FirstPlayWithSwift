@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		376D9D4622133BC00054BC42 /* Bow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376D9D4522133BC00054BC42 /* Bow.swift */; };
+		376D9D48221345B90054BC42 /* Sceptre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376D9D47221345B90054BC42 /* Sceptre.swift */; };
+		376D9D4A221346620054BC42 /* Sabre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376D9D49221346620054BC42 /* Sabre.swift */; };
+		376D9D4C2213468E0054BC42 /* Spear.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376D9D4B2213468E0054BC42 /* Spear.swift */; };
+		376D9D4E221346BD0054BC42 /* Dagger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376D9D4D221346BD0054BC42 /* Dagger.swift */; };
 		37F2229522036F6B003C36AB /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F2229422036F6B003C36AB /* main.swift */; };
 		37F22325220CA633003C36AB /* Avatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F22324220CA633003C36AB /* Avatar.swift */; };
 		37F22332220CA64A003C36AB /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F22326220CA64A003C36AB /* Errors.swift */; };
@@ -39,6 +44,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		376D9D4522133BC00054BC42 /* Bow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bow.swift; sourceTree = "<group>"; };
+		376D9D47221345B90054BC42 /* Sceptre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sceptre.swift; sourceTree = "<group>"; };
+		376D9D49221346620054BC42 /* Sabre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sabre.swift; sourceTree = "<group>"; };
+		376D9D4B2213468E0054BC42 /* Spear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spear.swift; sourceTree = "<group>"; };
+		376D9D4D221346BD0054BC42 /* Dagger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dagger.swift; sourceTree = "<group>"; };
 		37F2229122036F6B003C36AB /* FirstPlayWithSwift */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = FirstPlayWithSwift; sourceTree = BUILT_PRODUCTS_DIR; };
 		37F2229422036F6B003C36AB /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		37F22324220CA633003C36AB /* Avatar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Avatar.swift; sourceTree = "<group>"; };
@@ -103,6 +113,11 @@
 				37F22331220CA64A003C36AB /* Axe.swift */,
 				37F22329220CA64A003C36AB /* Mace.swift */,
 				37F2232E220CA64A003C36AB /* Hypnotist.swift */,
+				376D9D4522133BC00054BC42 /* Bow.swift */,
+				376D9D47221345B90054BC42 /* Sceptre.swift */,
+				376D9D4B2213468E0054BC42 /* Spear.swift */,
+				376D9D4D221346BD0054BC42 /* Dagger.swift */,
+				376D9D49221346620054BC42 /* Sabre.swift */,
 				37F22330220CA64A003C36AB /* Game.swift */,
 				37F22340220CA656003C36AB /* Team.swift */,
 				37F22326220CA64A003C36AB /* Errors.swift */,
@@ -167,15 +182,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				376D9D4622133BC00054BC42 /* Bow.swift in Sources */,
 				37F22325220CA633003C36AB /* Avatar.swift in Sources */,
 				37F22342220CA656003C36AB /* Weapon.swift in Sources */,
+				376D9D48221345B90054BC42 /* Sceptre.swift in Sources */,
 				37F2233B220CA64A003C36AB /* Fighter.swift in Sources */,
 				37F22333220CA64A003C36AB /* Giant.swift in Sources */,
+				376D9D4C2213468E0054BC42 /* Spear.swift in Sources */,
 				37F2233C220CA64A003C36AB /* Game.swift in Sources */,
+				376D9D4A221346620054BC42 /* Sabre.swift in Sources */,
 				37F22339220CA64A003C36AB /* Care.swift in Sources */,
 				37F22341220CA656003C36AB /* Sword.swift in Sources */,
 				37F22337220CA64A003C36AB /* Dwarf.swift in Sources */,
 				37F22343220CA656003C36AB /* Team.swift in Sources */,
+				376D9D4E221346BD0054BC42 /* Dagger.swift in Sources */,
 				37F22332220CA64A003C36AB /* Errors.swift in Sources */,
 				37F22335220CA64A003C36AB /* Mace.swift in Sources */,
 				37F2233D220CA64A003C36AB /* Axe.swift in Sources */,

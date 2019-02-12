@@ -7,8 +7,9 @@
 //
 
 enum Errors: String {
-    case selectANumber = "Veuillez saisir un chiffre de 1 à 4"
+    case selectANumber = "Veuillez saisir un chiffre"
     case nameEmpty = "Veuillez saisir au moins un caractère!"
     case teamAllReadyExist = "Nom d'équipe déjà existant, merci d'en choisir un autre"
     case avatarNameAllReadyExist = "Nom de joueur déjà existant, merci d'en choisir un autre"
+    case teamEmpty = "Equipe vide"
 }
