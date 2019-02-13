@@ -9,9 +9,13 @@
 class AvatarType {
     var life: Int
     var weapon: Weapon
+    var attack: Bool
+    var avatarTypeName: String
     
-    init(life: Int, weapon: Weapon) {
+    init(life: Int, attack: Bool, weapon: Weapon, avatarTypeName: String) {
         self.life = life
         self.weapon = weapon
+        self.attack = attack
+        self.avatarTypeName = avatarTypeName
     }
 }

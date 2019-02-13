@@ -9,6 +9,6 @@
 class Mage: AvatarType {
     
     init() {
-        super.init(life: 110,weapon: Soigne())
+        super.init(life: 110, attack: false, weapon: Soigne(), avatarTypeName: "Mage")
     }
 }

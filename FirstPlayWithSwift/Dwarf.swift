@@ -9,7 +9,7 @@
 class Nain: AvatarType {
     
     init() {
-        super.init(life: 50,weapon: Hache())
+        super.init(life: 50,attack: true, weapon: Hache(), avatarTypeName: "Nain")
     }
     
 }

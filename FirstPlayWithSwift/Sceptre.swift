@@ -9,7 +9,7 @@
 
 class Sceptre:Weapon {
     init() {
-        super.init(damage: 8, attack: true, weaponName: "sceptre")
+        super.init(damage: 8, weaponName: "sceptre")
     }
 }
 

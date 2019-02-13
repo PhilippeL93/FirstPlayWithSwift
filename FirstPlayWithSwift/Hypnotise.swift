@@ -9,7 +9,7 @@
 
 class Hypnotiseur: AvatarType {
     init() {
-        super.init(life: 80,weapon: Hypnotise())
+        super.init(life: 80, attack: true, weapon: Hypnotise(), avatarTypeName: "Hypnotiseur")
     }
 
 }

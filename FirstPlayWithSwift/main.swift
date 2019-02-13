@@ -6,6 +6,8 @@
 //  Copyright © 2019 Philippe. All rights reserved.
 //
 
+//initialisation of Game
+
 var game = Game()
 
 game.start()

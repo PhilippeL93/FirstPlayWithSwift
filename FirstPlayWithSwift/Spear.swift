@@ -9,7 +9,7 @@
 
 class Lance:Weapon {
     init() {
-        super.init(damage: 18, attack: true, weaponName: "lance")
+        super.init(damage: 18, weaponName: "lance")
     }
 }
 

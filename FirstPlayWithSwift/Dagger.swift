@@ -9,7 +9,7 @@
 
 class Dague:Weapon {
     init() {
-        super.init(damage: 8, attack: true, weaponName: "dague")
+        super.init(damage: 8, weaponName: "dague")
     }
 }
 

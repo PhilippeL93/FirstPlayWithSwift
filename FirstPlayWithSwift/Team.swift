@@ -17,9 +17,7 @@ class Team {
         arrayAvatars = []    }
     
     func addAvatar(avatar: Avatar) {
-        
         arrayAvatars.append(avatar)
-        
     }
     
     //  check for duplicate name of avatar
@@ -35,8 +33,6 @@ class Team {
     
     func printAvatar() {
         
-        var attackDescription: String
-        var avatarTypeDescription: String = ""
         var weaponDescription: String = ""
         var attackType: String = ""
         
@@ -45,50 +41,23 @@ class Team {
         print("")
         for item in arrayAvatars {
             
-            switch item.avatarType {
-            case is Combattant:
-                avatarTypeDescription = "Combattant"
-            case is Mage:
-                avatarTypeDescription = "Mage"
-            case is Nain:
-                avatarTypeDescription = "Nain"
-            case is Colosse:
-                avatarTypeDescription = "Colosse"
-            case is Hypnotiseur:
-                avatarTypeDescription = "Hypnotiseur"
-            default:
-                break
-            }
-            switch item.weapon {
-            case is Epee:
-                weaponDescription = "armé d'une epée"
-            case is Soigne:
-                weaponDescription = "qui promulgue des soins"
-            case is Masse:
-                weaponDescription = "armé d'une masse"
-            case is Hache:
-                weaponDescription = "armé d'une hache"
-            case is Hypnotise:
-                weaponDescription = "qui hypnotise l'adversaire"
-            default:
-                break
-            }
             switch item.attack {
             case true:
-                attackDescription = "Attaquant"
-                attackType = "les dégâts de son arme sont de"
+                attackType = "Dégâts de son arme :"
+                weaponDescription = "- Arme :"
             case false:
-                attackDescription = "Soigneur"
-                attackType = "qui redonne "
+                attackType = "Soigne avec :"
+                weaponDescription = "- Soigneur :"
             }
-                if item.life > 0 {
-                    print("\(attackDescription) \(item.avatarName) : \(avatarTypeDescription) \(weaponDescription)", "- \(attackType) \(item.weapon.damage)", "- points de vie : \(item.life)")
-                }
+            if item.life > 0 {
+                print("\(item.avatarName) : \(item.avatarType.avatarTypeName) \(weaponDescription) \(item.weapon.weaponName) - \(item.life) points de vie - \(attackType) \(item.weapon.damage) points de vie")
+            }
         }
         print("")
     }
     
-    func attack(teamAgainst: Team) -> Bool {
+    func attack(teamAgainst: Team) -> String {
+        //    func attack(teamAgainst: Team) -> Bool {
         
         var typeCall: String
         var description: String
@@ -101,11 +70,10 @@ class Team {
         let fighter = self.choiceAvatar(team: teamFrom, description: description, typeCall: typeCall)
         
         let randomNumber = Int.random(in: 0..<99) % 9
-        print(randomNumber)
         
-//        if randomNumber == 0 {
+        if randomNumber == 0 {
             changeWeaponAvatar(avatar: fighter)
-//        }
+        }
         
         typeCall  = "Adversary"
         description = "\(self.teamName), Quel personnage voulez-vous attaquer ?"
@@ -120,10 +88,10 @@ class Team {
         }
         
         if teamAgainst.numberOfAvatar > 0 {
-            return true
+            return ""
         } else {
-            print("Le vainuqueur de ce combat est \(teamFrom.teamName)")
-            return false
+            print("Le vainqueur de ce combat est \(teamFrom.teamName)")
+            return "Le vainqueur de ce combat est \(teamFrom.teamName)"
         }
     }
     
@@ -157,7 +125,6 @@ class Team {
         print("Le personnage \(carer.avatarName) a été soigné et a maintenant \(carer.life) points de vie")
     }
     
-    
     func changeWeaponAvatar(avatar: Avatar) {
         
         let avatar = avatar
@@ -168,20 +135,14 @@ class Team {
             let randomWeapon = Int(arc4random_uniform(UInt32(weaponArray.count)))
             let weaponSelected = weaponArray[randomWeapon]
             print("Un coffre apparait à vos pieds, saisissez l'arme qu'il contient")
-            print("Votre personnage \(avatar.avatarName) a maintenant une nouvelle arme \(weaponSelected) qui enlève \(weaponSelected.damage) points de vie ")
+            print("Votre personnage \(avatar.avatarName) a maintenant une nouvelle arme \(weaponSelected.weaponName) qui enlève \(weaponSelected.damage) points de vie ")
             avatar.weapon = weaponSelected
             avatar.weapon.damage = weaponSelected.damage
         case false:
             print("Votre mage va pouvoir soigner avec 10 points de vie au lieu de 5")
             avatar.weapon.damage = 10
         }
-        
-        
-        
     }
-    
-    
-    
     
     func choiceAvatar(team: Team, description: String, typeCall: String) -> Avatar {
         var userChoice: Int
@@ -207,18 +168,18 @@ class Team {
             case "Fighter":
                 if item.life > 0 && item.attack == true {
                     numberOfAvatarSelect += 1
-                    print("\(numberOfAvatarSelect) - \(item.avatarName)  \(item.avatarType)", " - Arme : \(item.weapon.weaponName)", " - Dégâts de son arme : \(item.weapon.damage)", " - Points de vie : \(item.life)")
+                    print("\(numberOfAvatarSelect) - \(item.avatarName)  \(item.avatarType.avatarTypeName) - Arme : \(item.weapon.weaponName) - \(item.life) points de vie - Dégâts de son arme : \(item.weapon.damage) points de vie")
                 }
             case "Adversary":
                 if item.life > 0 {
                     numberOfAvatarSelect += 1
-                    print("\(numberOfAvatarSelect) - \(item.avatarName)  \(item.avatarType)", " - Arme : \(item.weapon.weaponName)", " - Dégâts de son arme : \(item.weapon.damage)", " - Points de vie : \(item.life)")
+                    print("\(numberOfAvatarSelect) - \(item.avatarName)  \(item.avatarType.avatarTypeName) - Arme : \(item.weapon.weaponName) \(item.life) points de vie - Dégâts de son arme : \(item.weapon.damage) points de vie")
                     arrayAvatarsChoice[numberOfAvatarInit]! += numberOfAvatarSelect
                 }
             case "Care":
                 if item.life < item.lifeInitial {
                     numberOfAvatarSelect += 1
-                    print("\(numberOfAvatarSelect) - \(item.avatarName)  \(item.avatarType)", " - Arme : \(item.weapon.weaponName)"," - Points de vie : \(item.life)")
+                    print("\(numberOfAvatarSelect) - \(item.avatarName)  \(item.avatarType.avatarTypeName) - Arme : \(item.weapon.weaponName) - Points de vie : \(item.life)")
                     arrayAvatarsChoice[numberOfAvatarInit]! += numberOfAvatarSelect
                 }
             default:
@@ -231,6 +192,12 @@ class Team {
         repeat {
             userChoice = inputInteger()
             print("")
+            switch userChoice {
+            case 1...numberOfAvatarSelect:
+                break
+            default:
+                print(Errors.selectAvatar.rawValue)
+            }
         } while userChoice < 1 || userChoice > numberOfAvatarSelect
         
         for item in arrayAvatarsChoice {

@@ -9,6 +9,6 @@
 class Colosse: AvatarType {
     
     init() {
-        super.init(life: 125,weapon: Masse())
+        super.init(life: 125,attack: true, weapon: Masse(), avatarTypeName: "Colosse")
 }
 }

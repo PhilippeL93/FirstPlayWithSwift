@@ -9,7 +9,7 @@
 
 class Sabre:Weapon {
     init() {
-        super.init(damage: 11, attack: true, weaponName: "sabre")
+        super.init(damage: 11, weaponName: "sabre")
     }
 }
 

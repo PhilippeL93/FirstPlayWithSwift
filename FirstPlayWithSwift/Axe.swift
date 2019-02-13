@@ -8,6 +8,6 @@
 
 class Hache:Weapon {
     init() {
-        super.init(damage: 15, attack: true, weaponName: "hache")
+        super.init(damage: 15, weaponName: "hache")
     }
 }

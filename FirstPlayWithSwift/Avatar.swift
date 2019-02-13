@@ -6,6 +6,11 @@
 //  Copyright © 2019 Philippe. All rights reserved.
 //
 
+// Class Avatar contains
+// -init : initialisation of avatar
+// -attackAvatar : function in order to adversary receive damage from attacker
+// -function receiveDamage : in order 
+
 class Avatar {
     
     var avatarName: String
@@ -21,22 +26,7 @@ class Avatar {
         self.weapon = avatarType.weapon
         self.life = avatarType.life
         self.lifeInitial = avatarType.life
-        self.attack = true
-        
-        switch self.avatarType {
-        case is Combattant:
-            self.attack = true
-        case is Mage:
-            self.attack = false
-        case is Colosse:
-            self.attack = true
-        case is Nain:
-            self.attack = true
-        case is Hypnotiseur:
-            self.attack = true
-        default :
-            break
-        }
+        self.attack = avatarType.attack
     }
     
     func attackAvatar(avatar: Avatar) {
@@ -50,5 +40,5 @@ class Avatar {
             self.life = 0
         }
     }
-
+    
 }

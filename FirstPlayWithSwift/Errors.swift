@@ -12,4 +12,7 @@ enum Errors: String {
     case teamAllReadyExist = "Nom d'équipe déjà existant, merci d'en choisir un autre"
     case avatarNameAllReadyExist = "Nom de joueur déjà existant, merci d'en choisir un autre"
     case teamEmpty = "Equipe vide"
+    case selectFighter = "Choix erroné, chiffre doit être compris entre 1 et 5"
+    case selectAttackOrCare = "Choix erroné, sélectionner 1 ou 2"
+    case selectAvatar = "Choix erroné, veuiller saisir un chiffe parmi la liste"
 }

@@ -8,8 +8,8 @@
 
 class Combattant: AvatarType {
     
-    init() {
-        super.init(life: 90,weapon: Epee())
+    init() {        
+        super.init(life: 90, attack : true, weapon: Epee(), avatarTypeName: "Combattant")
     }
     
 }

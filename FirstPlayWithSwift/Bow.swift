@@ -8,6 +8,6 @@
 
 class Arc:Weapon {
     init() {
-        super.init(damage: 12, attack: true, weaponName: "arc")
+        super.init(damage: 12, weaponName: "hypnotise")
     }
 }

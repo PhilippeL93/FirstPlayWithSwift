@@ -8,6 +8,6 @@
 
 class Masse:Weapon {
     init() {
-        super.init(damage: 15, attack: true, weaponName: "masse")
+        super.init(damage: 15, weaponName: "masse")
     }
 }

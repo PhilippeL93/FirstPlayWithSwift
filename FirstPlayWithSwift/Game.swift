@@ -29,8 +29,8 @@ class Game {
             createTeams()
             
             launchFight()
-
-            //        displayWinner()
+            
+//        displayWinner()
             
             newGame = choiceOfNewGame()
             }
@@ -202,22 +202,23 @@ class Game {
             print("4 Nain")
             print("5 Hypnotiseur")
             answer = inputInteger()
+            switch answer {
+            case 1:
+                avatarType = Combattant()
+            case 2:
+                avatarType = Mage()
+            case 3:
+                avatarType = Colosse()
+            case 4:
+                avatarType = Nain()
+            case 5:
+                avatarType = Hypnotiseur()
+            default:
+                print("")
+                print(Errors.selectFighter.rawValue)
+            }
         } while answer < 1 || answer > 5
         
-        switch answer {
-        case 1:
-            avatarType = Combattant()
-        case 2:
-            avatarType = Mage()
-        case 3:
-            avatarType = Colosse()
-        case 4:
-            avatarType = Nain()
-        case 5:
-            avatarType = Hypnotiseur()
-        default:
-            break
-        }
         return avatarType!
     }
     
@@ -271,18 +272,20 @@ class Game {
     
     func launchFight() {
         
-        var fight: Bool = true
+//        var fight: Bool = true
+        var winner: String = ""
         var attackOrCare: String = ""
         
-        while fight == true {
-            
+//        while fight == true {
+        while winner == "" {
             changeTeamToPlay()
             
             attackOrCare = (choiceAttackOrCare(teamToPlay : teamToPlay!))
             
             switch attackOrCare {
             case "attack":
-                fight = (teamToPlay?.attack(teamAgainst : teamNotPlay!))!
+//                fight = (teamToPlay?.attack(teamAgainst : teamNotPlay!))!
+                winner = ((teamToPlay?.attack(teamAgainst : teamNotPlay!))!)
             case "care":
                 teamToPlay?.care()
             default:
@@ -307,6 +310,7 @@ class Game {
         var choiceUser: Int
         var mageAlive: Bool = false
         var numberOfInjured: Int = 0
+        var returnChoice: String = ""
         
         //            choix du soin seulement si
         //            -au moins un personnage est blessé (points de vie < points initiaux)
@@ -337,13 +341,17 @@ class Game {
                 print("")
                 choiceUser = inputInteger()
                 print()
+                
+                switch choiceUser {
+                case 1:
+                    returnChoice = "attack"
+                case 2:
+                    returnChoice = "care"
+                default:
+                    print(Errors.selectAttackOrCare.rawValue)
+                }
             } while choiceUser != 1 && choiceUser != 2
-            
-            if choiceUser == 1 {
-                return "attack"
-            } else {
-                return "care"
-            }
+            return returnChoice
         } else {
             return "attack"
         }
