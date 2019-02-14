@@ -15,4 +15,5 @@ enum Errors: String {
     case selectFighter = "Choix erroné, chiffre doit être compris entre 1 et 5"
     case selectAttackOrCare = "Choix erroné, sélectionner 1 ou 2"
     case selectAvatar = "Choix erroné, veuiller saisir un chiffe parmi la liste"
+    case teamMagusOnly = "Une équipe ne peut pas comporter que des mages, veuillez sélectionner au moins un combattant"
 }
