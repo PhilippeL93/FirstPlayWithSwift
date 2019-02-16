@@ -6,6 +6,10 @@
 //  Copyright © 2019 Philippe. All rights reserved.
 //
 
+
+/*   enum of errors
+*/
+
 enum Errors: String {
     case selectANumber = "Veuillez saisir un chiffre"
     case nameEmpty = "Veuillez saisir au moins un caractère!"

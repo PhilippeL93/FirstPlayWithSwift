@@ -6,10 +6,12 @@
 //  Copyright © 2019 Philippe. All rights reserved.
 //
 
-class Nain: AvatarType {
+//  class Dwarf inherif of Class AvataType
+
+class Dwarf: AvatarType {
     
     init() {
-        super.init(life: 50,attack: true, weapon: Hache(), avatarTypeName: "Nain")
+        super.init(life: 50,attack: true, weapon: Axe(), avatarTypeName: "Nain")
     }
     
 }

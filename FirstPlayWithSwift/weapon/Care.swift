@@ -1,14 +1,15 @@
 //
-//  Giant.swift
+//  Care.swift
 //  FirstPlayWithSwift
 //
 //  Created by Philippe on 31/01/2019.
 //  Copyright © 2019 Philippe. All rights reserved.
 //
 
-class Colosse: AvatarType {
-    
+//  class Care inherit of Class Weapon
+
+class Care:Weapon {
     init() {
-        super.init(life: 125,attack: true, weapon: Masse(), avatarTypeName: "Colosse")
-}
+        super.init(damage: 5, weaponName: "soins")
+    }
 }

@@ -10,17 +10,32 @@ import Foundation
 class Team {
     var teamName: String
     var arrayAvatars: [Avatar]
-    var numberOfAvatar: Int = 3
     
     init(teamName: String) {
         self.teamName = teamName
-        arrayAvatars = []    }
-    
+        arrayAvatars = []
+        
+    }
+
+//  function to add avatar in team
     func addAvatar(avatar: Avatar) {
         arrayAvatars.append(avatar)
+        
+    }
+ 
+//    MARK: group team check
+//  function to check at least one avatar is still alive in team
+    func checkTeam() -> Bool {
+    
+        for item in arrayAvatars {
+            if item.life > 0 {
+                return true
+            }
+        }
+        return false
     }
     
-    //  check for duplicate name of avatar
+//  function to check for duplicate name of avatar
     func checkForDuplicate(avatarName: String) -> Bool {
         
         for item in arrayAvatars {
@@ -31,21 +46,22 @@ class Team {
         return true
     }
     
-    //  check for duplicate name of avatar
+//  function to check for existing Magus in team
     func checkForMagus() -> Bool {
         
         for item in arrayAvatars {
-            if item.avatarType.avatarTypeName != "Mage" {
+            if item.avatarType.avatarTypeName == "Mage" {
                 return true
             }
         }
         return false
     }
     
+//  function to display avatars of team when team has been fully created
     func printAvatar() {
         
-        var weaponDescription: String = ""
-        var attackType: String = ""
+        var weaponDescription: String = ""   // to distinguish damage of wepaon between fighter or magus
+        var attackType: String = ""          // to distinguish type of wepaon between fighter or magus
         
         print("")
         print("Equipe: \(teamName) est constituée de ")
@@ -60,19 +76,25 @@ class Team {
                 attackType = "Soigne avec :"
                 weaponDescription = "- Soigneur :"
             }
-            if item.life > 0 {
+//            if item.life > 0 {
                 print("\(item.avatarName) : \(item.avatarType.avatarTypeName) \(weaponDescription) \(item.weapon.weaponName) - \(item.life) points de vie - \(attackType) \(item.weapon.damage) points de vie")
-            }
+//            }
         }
         print("")
     }
-    
+
+//    MARK: group team attack
+/*    function attack
+        determine Fighter by calling function choiceAvatar
+        determine Adversary by calling function choiceAvatar
+        call attackAvatar with Fighter and Adversary
+        verify looser by calling function checkTeam
+*/
     func attack(teamAgainst: Team) -> String {
-        //    func attack(teamAgainst: Team) -> Bool {
         
-        var typeCall: String
-        var description: String
-        let teamAgainst = teamAgainst
+        var typeCall: String           // to distinguish type of call : fighter or adversary
+        var description: String        // to distinguish description for type of call : fighter or adversary
+        let teamAgainst = teamAgainst  // team attacked
         
         let teamFrom = self
         
@@ -95,75 +117,33 @@ class Team {
         print("Le personnage \(fighter.avatarName) a attaqué le personnage \(adversary.avatarName) et lui a infligé une perte de \(fighter.weapon.damage) points de vie")
         
         if adversary.life == 0 {
-            teamAgainst.numberOfAvatar -= 1
             print("")
             print("Equipe \(teamAgainst.teamName) vient de perdre le personnage \(adversary.avatarName).")
             print("")
         }
         
-        if teamAgainst.numberOfAvatar > 0 {
-            return ""
-        } else {
-            print("Le vainqueur de ce combat est \(teamFrom.teamName)")
+        let looser = teamAgainst.checkTeam()
+        
+        if looser == false {
             return "Le vainqueur de ce combat est \(teamFrom.teamName)"
+        } else {
+            return ""
         }
+        
     }
-    
-    func care() {
-        
-        var typeCall: String
-        var description: String
-        var careDone: Int = 0
-        
-        let teamFrom = self
-        
-        typeCall = "Care"
-        description = "\(self.teamName) quel personnage voulez-vous soigner ?"
-        let carer = self.choiceAvatar(team: teamFrom, description: description, typeCall: typeCall)
-        
-        for item in arrayAvatars {
-            switch item.avatarType {
-            case is Mage:
-                careDone = item.weapon.damage
-            default:
-                break
-            }
-        }
-        carer.life += careDone
-        
-        if carer.life > carer.lifeInitial {
-            carer.life = carer.lifeInitial
-        }
-        print("Le personnage \(carer.avatarName) a été soigné et a maintenant \(carer.life) points de vie")
-    }
-    
-    private func changeWeaponAvatar(avatar: Avatar) {
-        
-        let avatar = avatar
-        let weaponArray = [Arc(), Sceptre(), Lance(), Sabre(), Dague() ]
-        
-        switch avatar.attack {
-        case true:
-            let randomWeapon = Int(arc4random_uniform(UInt32(weaponArray.count)))
-            let weaponSelected = weaponArray[randomWeapon]
-            print("Un coffre apparait à vos pieds, saisissez l'arme qu'il contient.")
-            print("")
-            print("Votre personnage \(avatar.avatarName) a maintenant une nouvelle arme \(weaponSelected.weaponName) qui enlève \(weaponSelected.damage) points de vie ")
-            avatar.weapon = weaponSelected
-            avatar.weapon.damage = weaponSelected.damage
-        case false:
-            print("Votre mage va pouvoir soigner avec 10 points de vie au lieu de 5")
-            avatar.weapon.damage = 10
-        }
-    }
-    
+
+/*    function to select avatar depending on type of call
+        3 types of call
+            Fighter in order to determine avatar fightering
+            Adversary in order to determine avatar attacked
+            Care in order to determine avatar to be care
+*/
     private func choiceAvatar(team: Team, description: String, typeCall: String) -> Avatar {
         var userChoice: Int
         var avatarChoice: Int = 0
         var numberOfAvatarInit: Int = 0
         var numberOfAvatarSelect: Int = 0
         let teamSelect = team
-        var avatarSelected: Avatar!
         let description = description
         let typeCall = typeCall
         var ind: Int =  0
@@ -181,6 +161,7 @@ class Team {
                 if item.life > 0 && item.attack == true {
                     numberOfAvatarSelect += 1
                     print("\(numberOfAvatarSelect) - \(item.avatarName)  \(item.avatarType.avatarTypeName) - Arme : \(item.weapon.weaponName) - \(item.life) points de vie - Dégâts de son arme : \(item.weapon.damage) points de vie")
+                    arrayAvatarsChoice[numberOfAvatarInit]! += numberOfAvatarSelect
                 }
             case "Adversary":
                 if item.life > 0 {
@@ -199,7 +180,7 @@ class Team {
             }
         }
         print("")
-        // Loop until choice of avatar is OK
+
         repeat {
             userChoice = inputInteger()
             print("")
@@ -217,12 +198,64 @@ class Team {
                 avatarChoice = item.key - 1
             }
         }
-        avatarSelected = team.arrayAvatars[avatarChoice]
+        let avatarSelected = team.arrayAvatars[avatarChoice]
         
         return avatarSelected
     }
+
+/*    function to change weapon at random
+        depending of avatar type
+            mage
+                --> increase of care
+            otherwise
+                --> change of weapon by random access to an array containing new weapons
+*/
+    private func changeWeaponAvatar(avatar: Avatar) {
+        
+        let avatar = avatar
+        let weaponArray = [Bow(), Sceptre(), Spear(), Sabre(), Dagger() ]
+        
+        switch avatar.attack {
+        case true:
+            let randomWeapon = Int(arc4random_uniform(UInt32(weaponArray.count)))
+            let weaponSelected = weaponArray[randomWeapon]
+            print("Un coffre apparait à vos pieds, saisissez l'arme qu'il contient.")
+            print("")
+            print("Votre personnage \(avatar.avatarName) a maintenant une nouvelle arme, \(weaponSelected.weaponName) qui enlève \(weaponSelected.damage) points de vie ")
+            avatar.weapon = weaponSelected
+            avatar.weapon.damage = weaponSelected.damage
+        case false:
+            print("Votre mage va pouvoir soigner avec 10 points de vie au lieu de 5")
+            avatar.weapon.damage = 10
+        }
+    }
     
-    // Function allowing at user to fill an Integer
+//    MARK: group team care
+//  function to choice what avatar should be care
+    func careChoice() {
+        
+        var typeCall: String
+        var description: String
+        
+        let teamFrom = self
+        
+        typeCall = "Care"
+        description = "\(self.teamName) quel personnage voulez-vous soigner ?"
+        let carer = self.choiceAvatar(team: teamFrom, description: description, typeCall: typeCall)
+        
+        for item in arrayAvatars {
+            print(item.avatarName)
+            switch item.avatarType {
+            case is Magus:
+                carer.care(avatar: item)
+            default:
+                break
+            }
+        }
+    }
+
+//    MARK: group readline function
+//    Function allowing at user to fill an Integer
     fileprivate func inputInteger() -> Int {
         var strIntReturn: Int = 0
         

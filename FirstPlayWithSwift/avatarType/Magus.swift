@@ -6,9 +6,11 @@
 //  Copyright © 2019 Philippe. All rights reserved.
 //
 
-class Mage: AvatarType {
+//  class Magus inherif of Class AvataType
+
+class Magus: AvatarType {
     
     init() {
-        super.init(life: 110, attack: false, weapon: Soigne(), avatarTypeName: "Mage")
+        super.init(life: 110, attack: false, weapon: Care(), avatarTypeName: "Mage")
     }
 }

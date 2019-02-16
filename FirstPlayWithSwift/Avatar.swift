@@ -28,17 +28,37 @@ class Avatar {
         self.lifeInitial = avatarType.life
         self.attack = avatarType.attack
     }
-    
+
+//    function attack avatar
     func attackAvatar(avatar: Avatar) {
         avatar.receiveDamage(damage: self.weapon.damage)
     }
     
+/*    function receive damage from attacker
+        If life is negative, put to 0 in order have avatar dead
+*/
     func receiveDamage(damage: Int) {
-        // If life is negatif, put to 0 in order avatar dead
         self.life = self.life - damage
         if self.life < 0 {
             self.life = 0
         }
     }
     
+/*    function care avatar of own team with care form magus
+        check new life is not greather than initial life
+     
+*/
+    
+    func care(avatar: Avatar) {
+        
+        let magus = avatar
+        
+        self.life += magus.weapon.damage
+
+        if self.life > self.lifeInitial {
+            self.life = self.lifeInitial
+        }
+        print("Le personnage \(self.avatarName) a été soigné et a maintenant \(self.life) points de vie")
+        
+    }
 }

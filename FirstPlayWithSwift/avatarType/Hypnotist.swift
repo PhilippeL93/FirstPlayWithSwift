@@ -6,8 +6,9 @@
 //  Copyright © 2019 Philippe. All rights reserved.
 //
 
+//  class Hypnotist inherif of Class AvataType
 
-class Hypnotiseur: AvatarType {
+class Hypnotist: AvatarType {
     init() {
         super.init(life: 80, attack: true, weapon: Hypnotise(), avatarTypeName: "Hypnotiseur")
     }

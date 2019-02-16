@@ -17,8 +17,12 @@ class Game {
     init() {
         
     }
-    
-    func start() {
+
+/*    function start of game
+        call rules
+        loop while a new game is required (newGame = true)
+*/
+ func start() {
         
         rulesGame()
         
@@ -35,50 +39,55 @@ class Game {
     }
     
     
+//    MARK: group rulesgame function
     
+//    display rules of the game
     private func rulesGame () {
         
-        print("-------------------------------------------------------------------------------------------------------")
-        print("")
-        print("Jeu de combat entre deux équipes")
-        print("")
-        print("Règles du jeu.")
-        print("")
-        print("Vous allez constituer chacun votre tour une équipe de 3 personnages,")
-        print("pour cela vous allez devoir choisir parmi 4 propositions.")
-        print("Parmi ces 5 personnages il y a un mage qui a pour rôle de soigner l'un ")
-        print("de vos combattants, il ne peux pas attaquer.")
-        print("")
-        print("Les personnages disponibles sont:")
-        print("- le combattant, 90 points de vie, armé d'une épée enlevant 10 points de vie à l'adversaire")
-        print("- le mage, 110 points de vie, pouvant soigner un membre de son équipe en lui redonnant 5 points de vie")
-        print("- le colosse, 125 points de vie, armé d'une masse enlevant 8 points de vie à l'adversaire ")
-        print("- le nain, 50 points de vie, armé d'une hache enlevant 15 points de vie à l'adversaire ")
-        print("- l'hypnotiseur, 80 points de vie, pouvoir d'hypnotiser enlevant 12 points de vie à l'adversaire")
-        print("")
-        print("Une fois les équipes constituées, vous allez jouer chacun votre tour en choississant :")
-        print("- soit d'attaquer l'équipe adverse")
-        print("- soit de soigner un personnage de votre équipe")
-        print("")
-        print("Il est obligatoire d'avoir au moins un attaquant dans son équipe.")
-        print("")
-        print("Il n'est possible de soigner un personnage de son équipe que si il a déjà perdu des points de vie.")
-        print("Un personnage soigné ne peut pas avoir plus de points de vie qu'il n'en avait initialement.")
-        print("")
-        print("Aléatoirement apparaîtra un coffre contenant une nouvelle arme qui remplacera celle du personnage en question.")
-        print("- Si il s'agit du mage, son pouvoir de guérison sera augmenté de 5 points")
-        print("- Sinon, l'arme et l'attaque du personnage concerné seront changées de façon aléatoire soit par :")
-        print("     - un sabre enlevant 11 point de vie")
-        print("     - une lance enlevant 8 point de vie")
-        print("     - un sceptre enlevant 8 points de vie")
-        print("     - un arc enlevant 12 points de vie")
-        print("     - une dague enlevant 8 points de vie")
-        print("")
-        print("Le jeu se termine lorsque les personnages d'une équipe ont tous perdu la vie? ")
-        print("")
-        print("-------------------------------------------------------------------------------------------------------")
+        print("""
+        -------------------------------------------------------------------------------------------------------
+
+        Jeu de combat entre deux équipes
+
+        Règles du jeu.
+
+            Vous allez constituer chacun votre tour une équipe de 3 personnages,
+            pour cela vous allez devoir choisir parmi 4 propositions.
+            Parmi ces 5 personnages il y a un mage qui a pour rôle de soigner l'un
+            de vos combattants, il ne peux pas attaquer.
+
+            Les personnages disponibles sont:
+            - le combattant, 90 points de vie, armé d'une épée enlevant 10 points de vie à l'adversaire
+            - le mage, 110 points de vie, pouvant soigner un membre de son équipe en lui redonnant 5 points de vie
+            - le colosse, 125 points de vie, armé d'une masse enlevant 8 points de vie à l'adversaire
+            - le nain, 50 points de vie, armé d'une hache enlevant 15 points de vie à l'adversaire
+            - l'hypnotiseur, 80 points de vie, pouvoir d'hypnotiser enlevant 12 points de vie à l'adversaire
+
+            Une fois les équipes constituées, vous allez jouer chacun votre tour en choississant :
+            - soit d'attaquer l'équipe adverse
+            - soit de soigner un personnage de votre équipe
+            
+            Il est obligatoire d'avoir au moins un attaquant dans son équipe.
+            
+            Il n'est possible de soigner un personnage de son équipe que si il a déjà perdu des points de vie.
+            Un personnage soigné ne peut pas avoir plus de points de vie qu'il n'en avait initialement.
+            
+            Aléatoirement apparaîtra un coffre contenant une nouvelle arme qui remplacera celle du personnage en question.
+            - Si il s'agit du mage, son pouvoir de guérison sera augmenté de 5 points
+            - Sinon, l'arme et l'attaque du personnage concerné seront changées de façon aléatoire soit par :
+                - un sabre enlevant 11 point de vie
+                - une lance enlevant 8 point de vie
+                - un sceptre enlevant 8 points de vie
+                - un arc enlevant 12 points de vie
+                - une dague enlevant 8 points de vie
+            
+            Le jeu se termine lorsqu'une équipe n'a plus de personnages.
+            
+        -------------------------------------------------------------------------------------------------------
+        """)
     }
-    
+
+//    function choice in order to a new game
     private func choiceOfNewGame() -> Bool {
         
         var answerForNewGame: String
@@ -87,6 +96,7 @@ class Game {
         print("Voulez-vous faire une nouvelle partie?")
         
         repeat {
+            print("")
             print("Répondre par Oui ou par Non.")
             answerForNewGame = inputString()
             print()
@@ -99,36 +109,41 @@ class Game {
         }
     }
     
+//    MARK: group team function
+/*    function to create two teams
+        creation of teamA
+        creation of teamA's avatars
+        creation of teamB
+        creation of teamB's avatars
+*/
     private func createTeams() {
         
-        // Create team A
-        let teamNameA = askUserForTeamsName(teamNumber: "Première")
+        let teamNameA = askUserForTeamsName(teamNumber: "Premier")
         teamA = createTeam(name: teamNameA)
         if teamA == nil {
             print("Première \(Errors.teamEmpty.rawValue)")
             fatalError()
         }
-        createFightersForTeam(team: teamA!, teamNumber: "Premier")
+        createFightersForTeam(team: teamA!)
         
         print("Equipe \(teamNameA) est complète")
         
         teamA!.printAvatar()
         
-        // Create team B
         let teamNameB = askUserForTeamsName(teamNumber: "Deuxième")
         teamB = createTeam(name: teamNameB)
         if teamB == nil {
             print("Deuxième \(Errors.teamEmpty.rawValue)")
             fatalError()
         }
-        createFightersForTeam(team: teamB!, teamNumber: "Deuxième")
+        createFightersForTeam(team: teamB!)
         
         print("Equipe \(teamNameB) est complète")
         
         teamB!.printAvatar()
     }
     
-    
+//    function to create instancy of team
     private func createTeam(name: String) -> Team {
         
         let team = Team(teamName: name)
@@ -136,14 +151,25 @@ class Game {
         return team
     }
     
-    private func createFightersForTeam(team: Team, teamNumber : String) {
-        
-        var avatarNumber: String = ""
-        //        var teamName: String = ""
-        let team = team
+//    function to ask a name for team
+    fileprivate func askUserForTeamsName(teamNumber: String) -> String{
+        var playerName: String = " "
         let teamNumber = teamNumber
         
-        //        teamName = team.teamName
+        print("")
+        print("\(teamNumber) joueur, veuillez nommer votre équipe?")
+        
+        playerName = inputString()
+        
+        return playerName
+    }
+    
+//    MARK: group avatars function
+//    function to create 3 avatars in a team
+    private func createFightersForTeam(team: Team) {
+        
+        var avatarNumber: String = ""       // to distinguish number of avatar first to third
+        let team = team
         
         for index in 1...3 {
             switch index {
@@ -156,63 +182,60 @@ class Game {
             default:
                 break
             }
-            //      choice of avatar type
-            //            let avatarType = fillUpAvatarType(teamNameDisplay: teamName, avatarNumber: avatarNumber)
+
             let avatarType = fillUpAvatarType(team: team, avatarNumber: avatarNumber)
             
-            //      choice of avatar name
-            let avatarName = askUserForAvatarName(teamNumber: teamNumber)
+            let avatarName = askUserForAvatarName()
             
-            //      create avatar
             let avatarUsed = Avatar(avatarName: avatarName, avatarType: avatarType)
             
             team.addAvatar(avatar: avatarUsed)
             
         }
     }
-    
+
+/*    function to determine type of avatar
+        a check is done to verify that team contains at least one fighter not only magus
+*/
     private func fillUpAvatarType(team: Team,  avatarNumber: String) ->   AvatarType {
-        //    private func fillUpAvatarType(teamNameDisplay: String,  avatarNumber: String) ->   AvatarType {
         var answer: Int
         let teamNameDisplay = team.teamName
         let avatarNumber = avatarNumber
         var avatarType: AvatarType!
-        var checkForMagus: Bool = true
         
         print("")
         print("Equipe \(teamNameDisplay), Choississez votre \(avatarNumber) personnage")
         
         repeat {
-            print("")
-            print("1 Combattant")
-            print("2 Mage")
-            print("3 Colosse")
-            print("4 Nain")
-            print("5 Hypnotiseur")
+            print("""
+            1 Combattant
+            2 Mage
+            3 Colosse
+            4 Nain
+            5 Hypnotiseur
+            """)
             answer = inputInteger()
             switch answer {
             case 1:
-                avatarType = Combattant()
+                avatarType = Fighter()
             case 2:
                 switch avatarNumber {
                 case "troisième":
-                    checkForMagus = team.checkForMagus()
-                    switch checkForMagus {
-                    case true:
-                        avatarType = Mage()
-                    case false:
+                    if team.checkForMagus() {
                         answer = 0
                         print(Errors.teamMagusOnly.rawValue)
+                    } else {
+                        avatarType = Magus()
                     }
                 default:
-                    avatarType = Mage()
+                    avatarType = Magus()
                 }
             case 3:
-                avatarType = Colosse()
+                avatarType = Giant()
             case 4:
-                avatarType = Nain()
+                avatarType = Dwarf()
             case 5:
-                avatarType = Hypnotiseur()
+                avatarType = Hypnotist()
             default:
                 print("")
                 print(Errors.selectFighter.rawValue)
@@ -220,12 +243,14 @@ class Game {
         } while answer < 1 || answer > 5
         return avatarType!
     }
-    
-    private func askUserForAvatarName(teamNumber: String) -> String {
+
+/*    function to name avatar by asking to user
+        a check is done to verify that avatar's name is single
+*/
+    private func askUserForAvatarName() -> String {
         var avatarName: String
         var nameFound: Bool
         var checkForDuplicates = true
-        let teamNumber = teamNumber
         
         print("")
         print("Veuillez nommer votre Personnage")
@@ -233,16 +258,12 @@ class Game {
         repeat {
             nameFound = true
             avatarName = inputString()
-            switch teamNumber {
-            case "Premier" :
+            
+            if teamA != nil {
                 checkForDuplicates = teamA!.checkForDuplicate(avatarName: avatarName)
-            case "Deuxième" :
-                checkForDuplicates = teamA!.checkForDuplicate(avatarName: avatarName)
-                if checkForDuplicates == true {
-                    checkForDuplicates = teamB!.checkForDuplicate(avatarName: avatarName)
-                }
-            default:
-                break
+            }
+            if teamB != nil {
+                checkForDuplicates = teamB!.checkForDuplicate(avatarName: avatarName)
             }
             
             if checkForDuplicates == false {
@@ -256,41 +277,32 @@ class Game {
         return avatarName
     }
     
-    fileprivate func askUserForTeamsName(teamNumber: String) -> String{
-        var playerName: String = " "
-        let teamNumber = teamNumber
-        
-        print("")
-        print("\(teamNumber) joueur, veuillez nommer votre équipe?")
-        
-        playerName = inputString()
-        
-        return playerName
-    }
-    
+//    MARK: group fight function
+/*    funtion to launch game
+        is executed while a winner has not been declared
+*/
     private func launchFight() {
         
-        //        var fight: Bool = true
         var winner: String = ""
-        var attackOrCare: String = ""
         
-        //        while fight == true {
         while winner == "" {
             changeTeamToPlay()
             
-            attackOrCare = (choiceAttackOrCare(teamToPlay : teamToPlay!))
+            let attackOrCare = (choiceAttackOrCare(teamToPlay : teamToPlay!))
             
             switch attackOrCare {
             case "attack":
                 winner = ((teamToPlay?.attack(teamAgainst : teamNotPlay!))!)
             case "care":
-                teamToPlay?.care()
+                teamToPlay?.careChoice()
             default:
                 break
             }
         }
+        print(winner)
     }
-    
+
+//    function to alternate player betweem teamA and teamB
     fileprivate func changeTeamToPlay() {
         if teamToPlay === teamA! {
             teamToPlay = teamB!
@@ -300,7 +312,15 @@ class Game {
             teamNotPlay = teamB!
         }
     }
-    
+
+/*    function to choice between attack or care
+        depending on Magus alive and fighter is injured
+            --> care is possible
+                return "care"
+        otherwise
+            --> attack only
+                return "attack"
+*/
     fileprivate func choiceAttackOrCare(teamToPlay: Team) -> String {
         
         let teamToPlay = teamToPlay
@@ -308,11 +328,11 @@ class Game {
         var mageAlive: Bool = false
         var numberOfInjured: Int = 0
         var returnChoice: String = ""
-    
+        
         for item in teamToPlay.arrayAvatars {
             
             switch item.avatarType {
-            case is Mage:
+            case is Magus:
                 if item.life > 0 {
                     mageAlive = true
                 } else {
@@ -327,11 +347,11 @@ class Game {
         }
         if numberOfInjured > 0 && mageAlive == true {
             repeat {
-                print("")
-                print("Equipe \(teamToPlay.teamName) : Que voulez vous faire?")
-                print("1. Attaquer l'équipe adverse")
-                print("2. Soigner un combattant de votre équipe")
-                print("")
+                print("""
+                Equipe \(teamToPlay.teamName) : Que voulez vous faire?
+                    1. Attaquer l'équipe adverse
+                    2. Soigner un combattant de votre équipe
+                """)
                 choiceUser = inputInteger()
                 print()
                 
@@ -350,7 +370,8 @@ class Game {
         }
     }
     
-    // Function allowing at user to fill an Integer
+//    MARK: group readline function
+//    function allowing at user to fill an Integer
     fileprivate func inputInteger() -> Int {
         var strIntReturn: Int = 0
         
@@ -366,7 +387,7 @@ class Game {
         return Int(strIntReturn)
     }
     
-    // Function allowing at user to fill a String
+//    function allowing at user to fill a String
     fileprivate func inputString() -> String {
         var stringReturn: String = ""
         var inputOk: Bool

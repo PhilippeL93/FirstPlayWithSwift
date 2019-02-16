@@ -6,7 +6,9 @@
 //  Copyright © 2019 Philippe. All rights reserved.
 //
 
-class Masse:Weapon {
+//  class Mace inherit of Class Weapon
+
+class Mace:Weapon {
     init() {
         super.init(damage: 15, weaponName: "masse")
     }

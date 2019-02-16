@@ -6,6 +6,7 @@
 //  Copyright © 2019 Philippe. All rights reserved.
 //
 
+//  class Hypnotise inherit of Class Weapon
 
 class Hypnotise:Weapon {
     init() {
