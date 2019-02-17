@@ -6,7 +6,7 @@
 //  Copyright © 2019 Philippe. All rights reserved.
 //
 
-//  class Dwarf inherif of Class AvataType
+//  class Dwarf inherit of Class AvataType
 
 class Dwarf: AvatarType {
     

@@ -6,7 +6,7 @@
 //  Copyright © 2019 Philippe. All rights reserved.
 //
 
-//  class Giant inherif of Class AvataType
+//  class Giant inherit of Class AvataType
 
 class Giant: AvatarType {
     

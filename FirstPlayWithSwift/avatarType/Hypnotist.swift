@@ -6,7 +6,7 @@
 //  Copyright © 2019 Philippe. All rights reserved.
 //
 
-//  class Hypnotist inherif of Class AvataType
+//  class Hypnotist inherit of Class AvataType
 
 class Hypnotist: AvatarType {
     init() {

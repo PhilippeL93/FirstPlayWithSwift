@@ -126,9 +126,10 @@ class Game {
         }
         createFightersForTeam(team: teamA!)
         
+        print("")
         print("Equipe \(teamNameA) est complète")
         
-        teamA!.printAvatar()
+        teamA!.printAvatarTeam()
         
         let teamNameB = askUserForTeamsName(teamNumber: "Deuxième")
         teamB = createTeam(name: teamNameB)
@@ -138,9 +139,10 @@ class Game {
         }
         createFightersForTeam(team: teamB!)
         
+        print("")
         print("Equipe \(teamNameB) est complète")
         
-        teamB!.printAvatar()
+        teamB!.printAvatarTeam()
     }
     
 //    function to create instancy of team
@@ -208,11 +210,11 @@ class Game {
         
         repeat {
             print("""
-            1 Combattant
-            2 Mage
-            3 Colosse
-            4 Nain
-            5 Hypnotiseur
+                1 Combattant
+                2 Mage
+                3 Colosse
+                4 Nain
+                5 Hypnotiseur
             """)
             answer = inputInteger()
             switch answer {
@@ -348,7 +350,8 @@ class Game {
         if numberOfInjured > 0 && mageAlive == true {
             repeat {
                 print("""
-                Equipe \(teamToPlay.teamName) : Que voulez vous faire?
+                
+                \(teamToPlay.teamName) : Que voulez vous faire?
                     1. Attaquer l'équipe adverse
                     2. Soigner un combattant de votre équipe
                 """)

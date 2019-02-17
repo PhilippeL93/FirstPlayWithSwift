@@ -32,6 +32,9 @@ class Avatar {
 //    function attack avatar
     func attackAvatar(avatar: Avatar) {
         avatar.receiveDamage(damage: self.weapon.damage)
+        print("")
+        print("Le personnage \(self.avatarName) a attaqué le personnage \(avatar.avatarName) et lui a infligé une perte de \(self.weapon.damage) points de vie")
+        
     }
     
 /*    function receive damage from attacker
@@ -48,7 +51,6 @@ class Avatar {
         check new life is not greather than initial life
      
 */
-    
     func care(avatar: Avatar) {
         
         let magus = avatar
@@ -58,6 +60,7 @@ class Avatar {
         if self.life > self.lifeInitial {
             self.life = self.lifeInitial
         }
+        print("")
         print("Le personnage \(self.avatarName) a été soigné et a maintenant \(self.life) points de vie")
         
     }

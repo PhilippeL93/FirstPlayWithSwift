@@ -6,7 +6,7 @@
 //  Copyright © 2019 Philippe. All rights reserved.
 //
 
-//  class Magus inherif of Class AvataType
+//  class Magus inherit of Class AvataType
 
 class Magus: AvatarType {
     
