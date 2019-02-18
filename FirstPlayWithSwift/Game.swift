@@ -51,10 +51,10 @@ class Game {
 
         Règles du jeu.
 
-            Vous allez constituer chacun votre tour une équipe de 3 personnages,
-            pour cela vous allez devoir choisir parmi 4 propositions.
-            Parmi ces 5 personnages il y a un mage qui a pour rôle de soigner l'un
-            de vos combattants, il ne peux pas attaquer.
+            Vous allez constituer chacun votre tour une équipe de 3 combattants,
+            pour cela vous allez devoir choisir parmi 5 personnages.
+            Au sein de ces 5 personnages se trouve un mage qui a pour rôle de soigner l'un
+            de vos combattants, il ne peut pas attaquer.
 
             Les personnages disponibles sont:
             - le combattant, 90 points de vie, armé d'une épée enlevant 10 points de vie à l'adversaire
@@ -69,14 +69,14 @@ class Game {
             
             Il est obligatoire d'avoir au moins un attaquant dans son équipe.
             
-            Il n'est possible de soigner un personnage de son équipe que si il a déjà perdu des points de vie.
+            Il n'est possible de soigner un personnage de son équipe que s'il a déjà perdu des points de vie.
             Un personnage soigné ne peut pas avoir plus de points de vie qu'il n'en avait initialement.
             
             Aléatoirement apparaîtra un coffre contenant une nouvelle arme qui remplacera celle du personnage en question.
-            - Si il s'agit du mage, son pouvoir de guérison sera augmenté de 5 points
+            - S'il s'agit du mage, son pouvoir de guérison sera augmenté de de façon aléatoire entre 1 et 10 points
             - Sinon, l'arme et l'attaque du personnage concerné seront changées de façon aléatoire soit par :
-                - un sabre enlevant 11 point de vie
-                - une lance enlevant 8 point de vie
+                - un sabre enlevant 11 points de vie
+                - une lance enlevant 8 points de vie
                 - un sceptre enlevant 8 points de vie
                 - un arc enlevant 12 points de vie
                 - une dague enlevant 8 points de vie

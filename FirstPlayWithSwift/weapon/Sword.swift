@@ -10,6 +10,6 @@
 
 class Sword:Weapon {
     init() {
-                super.init(damage: 10, weaponName: "epée")
+                super.init(damage: 10, weaponName: "épée")
     }
 }

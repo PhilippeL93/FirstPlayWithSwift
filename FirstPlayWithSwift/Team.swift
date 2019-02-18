@@ -212,8 +212,9 @@ class Team {
         case true:
             let randomWeapon = Int(arc4random_uniform(UInt32(weaponRandomArray.count)))
             let weaponSelected = weaponRandomArray[randomWeapon]
-            print("Un coffre apparait à vos pieds, saisissez l'arme qu'il contient.")
-            print("")
+            print("""
+                Un coffre apparait à vos pieds, saisissez l'arme qu'il contient.
+                """)
             print("Votre personnage \(avatar.avatarName) a maintenant une nouvelle arme, \(weaponSelected.weaponName) qui enlève \(weaponSelected.damage) points de vie ")
             avatar.weapon = weaponSelected
             avatar.weapon.damage = weaponSelected.damage
