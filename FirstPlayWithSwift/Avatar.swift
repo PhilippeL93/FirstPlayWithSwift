@@ -6,10 +6,17 @@
 //  Copyright © 2019 Philippe. All rights reserved.
 //
 
-// Class Avatar contains
-// -init : initialisation of avatar
-// -attackAvatar : function in order to adversary receive damage from attacker
-// -function receiveDamage : in order 
+/* class Avatar
+        avatarName : name of avatar
+        avatarType : depending on Class AvatarType
+        life : number of points of life
+        lifeInitial : initial number of points of life
+        attack :
+            true for fighter
+            false for magus
+        weapon: depending on Class Weapon
+ */
+
 
 class Avatar {
     
@@ -29,7 +36,9 @@ class Avatar {
         self.attack = avatarType.attack
     }
 
-//    function attack avatar
+/*    function attack avatar
+        avatar attacked receive damage from avatar attacker by calling function receiveDamage
+     */
     func attackAvatar(avatar: Avatar) {
         avatar.receiveDamage(damage: self.weapon.damage)
         print("")

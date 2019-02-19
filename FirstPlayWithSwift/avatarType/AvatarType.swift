@@ -6,6 +6,16 @@
 //  Copyright © 2019 Philippe. All rights reserved.
 //
 
+/* class AvatarType
+    define
+        life : life of avatar
+        weapon : depending on class Weapon
+        attack :
+            true for fighter
+            false for magus
+        avatarTypeName : name of avatar
+ */
+
 class AvatarType {
     var life: Int
     var weapon: Weapon

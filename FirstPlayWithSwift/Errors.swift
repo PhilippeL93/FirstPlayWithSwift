@@ -8,6 +8,7 @@
 
 
 /*   enum of errors
+        enum of kind of errors
 */
 
 enum Errors: String {

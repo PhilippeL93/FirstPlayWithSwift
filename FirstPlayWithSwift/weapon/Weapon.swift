@@ -6,6 +6,12 @@
 //  Copyright © 2019 Philippe. All rights reserved.
 //
 
+
+/* class weapon
+    define
+        damage : weapon damage
+        weaponName : weapon name
+  */
 class Weapon {
     var damage: Int
     var weaponName: String
