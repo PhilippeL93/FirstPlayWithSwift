@@ -305,14 +305,11 @@ class Team {
      */
     func careChoice() {
         
-        var typeCall: String                                    //
-        var description: String                                 //
-        
         let teamFrom = self
+        let typeCall = "Care"
         
-        typeCall = "Care"
         print("")
-        description = "\(self.teamName) quel personnage voulez-vous soigner ?"
+        let description = "\(self.teamName) quel personnage voulez-vous soigner ?"
         let carer = self.choiceAvatar(team: teamFrom, description: description, typeCall: typeCall)
         
         for item in arrayAvatars {
