@@ -93,14 +93,14 @@ class Team {
         return true
      
     */
-    func checkForDuplicate(avatarName: String) -> Bool {
+    func checkForDuplicateAvatarName(avatarName: String) -> Bool {
         
         for item in arrayAvatars {
             if item.avatarName == avatarName {
-                return false
+                return true
             }
         }
-        return true
+        return false
     }
     
 /*  function to check for existing not only Magus in team
@@ -169,7 +169,7 @@ class Team {
         
         typeCall = "Fighter"
         description = "\(self.teamName) avec quel personnage voulez-vous attaquer ?"
-        let fighter = self.choiceAvatar(team: teamFrom, description: description, typeCall: typeCall)
+        let fighter = self.chooseAvatar(team: teamFrom, description: description, typeCall: typeCall)
         
         let randomNumber = Int.random(in: 0..<99) % 9
         
@@ -179,7 +179,7 @@ class Team {
         
         typeCall  = "Adversary"
         description = "\(self.teamName), Quel personnage voulez-vous attaquer ?"
-        let adversary = self.choiceAvatar(team: teamAgainst, description: description, typeCall: typeCall)
+        let adversary = self.chooseAvatar(team: teamAgainst, description: description, typeCall: typeCall)
         
         fighter.attackAvatar(avatar: adversary)
         
@@ -204,14 +204,10 @@ class Team {
             Care in order to determine avatar to be care
         return avatar selected for respective call
      */
-    private func choiceAvatar(team: Team, description: String, typeCall: String) -> Avatar {
+    private func chooseAvatar(team: Team, description: String, typeCall: String) -> Avatar {
        
         var userChoice: Int                            // choise avatar by player
         var numberOfAvatarSelect: Int = 0              // number of avatar concerned by typeCall
-        let teamSelect = team                          // team concerned by call
-        let description = description                  // description of type of call coming for initial call
-        let typeCall = typeCall                        // type of call : Fighter or Adversary or Care
-
         var arrayAvatarsChoice = [1: 0, 2: 0, 3:0]     // array to store key of avatars
         
         print("")
@@ -221,22 +217,22 @@ class Team {
         for numberAvatar in 0...2 {
             switch typeCall {
             case "Fighter":
-                if teamSelect.arrayAvatars[numberAvatar].life > 0 && teamSelect.arrayAvatars[numberAvatar].attack == true {
+                if team.arrayAvatars[numberAvatar].life > 0 && team.arrayAvatars[numberAvatar].attack == true {
                     numberOfAvatarSelect += 1
                     arrayAvatarsChoice[numberOfAvatarSelect]! += numberAvatar
-                    print("   \(numberOfAvatarSelect) -", terminator: " "); teamSelect.printAvatar(numberAvatar: numberAvatar)
+                    print("   \(numberOfAvatarSelect) -", terminator: " "); team.printAvatar(numberAvatar: numberAvatar)
                 }
             case "Adversary":
-                if teamSelect.arrayAvatars[numberAvatar].life > 0 {
+                if team.arrayAvatars[numberAvatar].life > 0 {
                     numberOfAvatarSelect += 1
                     arrayAvatarsChoice[numberOfAvatarSelect]! += numberAvatar
-                    print("   \(numberOfAvatarSelect) -", terminator: " "); teamSelect.printAvatar(numberAvatar: numberAvatar)
+                    print("   \(numberOfAvatarSelect) -", terminator: " "); team.printAvatar(numberAvatar: numberAvatar)
                     }
             case "Care":
-                if teamSelect.arrayAvatars[numberAvatar].life < teamSelect.arrayAvatars[numberAvatar].lifeInitial {
+                if team.arrayAvatars[numberAvatar].life < team.arrayAvatars[numberAvatar].lifeInitial {
                     numberOfAvatarSelect += 1
                     arrayAvatarsChoice[numberOfAvatarSelect]! += numberAvatar
-                    print("   \(numberOfAvatarSelect) -", terminator: " "); teamSelect.printAvatar(numberAvatar: numberAvatar)
+                    print("   \(numberOfAvatarSelect) -", terminator: " "); team.printAvatar(numberAvatar: numberAvatar)
                     }
             default:
                 break
@@ -273,7 +269,6 @@ class Team {
         */
     private func changeWeaponAvatar(avatar: Avatar) {
         
-        let avatar = avatar                                                         // avatar concerned by call
         let weaponRandomArray = [Bow(), Sceptre(), Spear(), Sabre(), Dagger() ]     // array containing new weapons
         let careRandomArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]                       // array containing new care
         
@@ -303,14 +298,14 @@ class Team {
         search magus in team in order to have points of life to care
             call function care with avatar to care and magus
      */
-    func careChoice() {
+    func chooseCare() {
         
         let teamFrom = self
         let typeCall = "Care"
         
         print("")
         let description = "\(self.teamName) quel personnage voulez-vous soigner ?"
-        let carer = self.choiceAvatar(team: teamFrom, description: description, typeCall: typeCall)
+        let carer = self.chooseAvatar(team: teamFrom, description: description, typeCall: typeCall)
         
         for item in arrayAvatars {
             switch item.avatarType {
@@ -323,21 +318,16 @@ class Team {
     }
     
 //    MARK: group readline function
-/*    function allowing at player to fill an Integer
-        executed until an integer has been filled
+    /*    function allowing at player to fill an Integer
+     executed until an integer has been filled
      */
     fileprivate func inputInteger() -> Int {
-        var strIntReturn: Int = 0
         
-        if let strData1 = readLine() {
-            if let int = Int(strData1)
-            {
-                strIntReturn = int
-            } else {
-                print(Errors.selectANumber.rawValue)
-                print("")
-            }
+        guard let stringRead = readLine(), let numberToReturn = Int(stringRead) else {
+            print(Errors.selectANumber.rawValue)
+            print("")
+            return 0
         }
-        return Int(strIntReturn)
+        return numberToReturn
     }
 }

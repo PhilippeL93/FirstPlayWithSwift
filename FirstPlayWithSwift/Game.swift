@@ -7,10 +7,10 @@
 //
 
 /* class Avatar
-    teamA : team A
-    teamB : team B
-    teamAttacker : team attacker
-    teamAttacked : team attacked
+ teamA : team A
+ teamB : team B
+ teamAttacker : team attacker
+ teamAttacked : team attacked
  */
 
 class Game {
@@ -23,35 +23,35 @@ class Game {
     init() {
         
     }
-
-/*    function start of game
-        call function rules
-        loop while a new game is required (newGame = true)
-            call function createTeams to create 2 teams
-            call function launchFight to launch fight between 2 teams
-            call fucntion choiceOfNewGame to choose to play a new game
-*/
- func start() {
+    
+    /*    function start of game
+     call function to print rules
+     loop while a new game is required (newGameToPlay = true)
+     call function createTeams to create 2 teams
+     call function launchFight to launch fight between 2 teams
+     call function chooseOfNewGame to choose to play a new game
+     */
+    func start() {
         
-        rulesGame()
+        printRulesGame()
         
-        var newGame: Bool = true
+        var newGameToPlay: Bool = true
         
-        while newGame == true {
+        while newGameToPlay == true {
             
             createTeams()
             
             launchFight()
             
-            newGame = choiceOfNewGame()
+            newGameToPlay = chooseOfNewGame()
         }
     }
     
     
-//    MARK: group rulesgame function
+    //    MARK: group rulesgame function
     
-//    display rules of the game
-    private func rulesGame () {
+    //    display rules of the game
+    private func printRulesGame () {
         
         print("""
         -------------------------------------------------------------------------------------------------------
@@ -95,16 +95,16 @@ class Game {
         -------------------------------------------------------------------------------------------------------
         """)
     }
-
-/*    function choice in order to start a new game
-        return true is new game required
-            answer Oui to question
-        return false is not new game required
-            answer Non to question
+    
+    /*    function choice in order to start a new game
+     return true is new game required
+        answer Oui to question
+     return false is not new game required
+        answer Non to question
      */
-    private func choiceOfNewGame() -> Bool {
+    private func chooseOfNewGame() -> Bool {
         
-        var answerForNewGame: String
+    var answerForNewGame: String
         
         print("")
         print("Voulez-vous faire une nouvelle partie?")
@@ -123,55 +123,51 @@ class Game {
         }
     }
     
-//    MARK: group team function
-/*    function to create two teams
-        creation of teamA
-            call function askUserForTeamsName for teamA's name
-            call function createTeam to create teamA
-        creation of teamA's avatars
-            call function createFightersForTeam in order to create avatar of teamA
-        display avatars of teamA
-            call function printAvatarTeam
+    //    MARK: group team function
+    /*    function to create two teams
+     creation of teamA
+     call function askUserForTeamsName for teamA's name
+     call function createTeam to create teamA
+     creation of teamA's avatars
+     call function createFightersForTeam in order to create avatar of teamA
+     display avatars of teamA
+     call function printAvatarTeam
      
-        creation of teamB
-            call function askUserForTeamsName for teamB's name
-            call function createTeam to create teamB
-        creation of teamB's avatars
-            call function createFightersForTeam in order to create avatar of teamB
-        display avatars of teamB
-            call function printAvatarTeam
+     creation of teamB
+     call function askUserForTeamsName for teamB's name
+     call function createTeam to create teamB
+     creation of teamB's avatars
+     call function createFightersForTeam in order to create avatar of teamB
+     display avatars of teamB
+     call function printAvatarTeam
      */
     private func createTeams() {
         
-        let teamNameA = askUserForTeamsName(teamNumber: "Premier")
-        teamA = createTeam(name: teamNameA)
-        if teamA == nil {
-            print("Première \(Errors.teamEmpty.rawValue)")
-            fatalError()
-        }
+        let teamAName = askUserForTeamName(teamNumber: "Premier")
+
+        teamA = createTeam(name: teamAName)
+
         createFightersForTeam(team: teamA!)
         
         print("")
-        print("Equipe \(teamNameA) est complète")
+        print("Equipe \(teamAName) est complète")
         
         teamA!.printAvatarTeam()
         
-        let teamNameB = askUserForTeamsName(teamNumber: "Deuxième")
-        teamB = createTeam(name: teamNameB)
-        if teamB == nil {
-            print("Deuxième \(Errors.teamEmpty.rawValue)")
-            fatalError()
-        }
+        let teamBName = askUserForTeamName(teamNumber: "Deuxième")
+
+        teamB = createTeam(name: teamBName)
+
         createFightersForTeam(team: teamB!)
         
         print("")
-        print("Equipe \(teamNameB) est complète")
+        print("Equipe \(teamBName) est complète")
         
         teamB!.printAvatarTeam()
     }
     
-/*    function to create instancy of team
-        return team
+    /*    function to create instancy of team
+     return team
      */
     private func createTeam(name: String) -> Team {
         
@@ -180,11 +176,11 @@ class Game {
         return team
     }
     
-/*    function to ask a name for team
-        call function inputString
-        return name of the team
+    /*    function to ask a name for team
+     call function inputString
+     return name of the team
      */
-    fileprivate func askUserForTeamsName(teamNumber: String) -> String{
+    fileprivate func askUserForTeamName(teamNumber: String) -> String{
         let teamNumber = teamNumber    // numbering of team to differentiate message
         
         print("")
@@ -195,19 +191,18 @@ class Game {
         return playerName
     }
     
-//    MARK: group avatars function
+    //    MARK: group avatars function
     
-/*    function to create 3 avatars in a team
-        executed 3 times
-            call function fillUpAvatarType for selection Avatar Type
-            call function askUserForAvatarName for avtar's name
-            call init Avatar in order to create avatar
-            call function addAvatar in order to add avatar in team
+    /*    function to create 3 avatars in a team
+     executed 3 times
+     call function fillUpAvatarType for selection Avatar Type
+     call function askUserForAvatarName for avtar's name
+     call init Avatar in order to create avatar
+     call function addAvatar in order to add avatar in team
      */
     private func createFightersForTeam(team: Team) {
         
         var avatarNumber: String = ""       // to distinguish number of avatar first to third
-        let team = team                     // team concerned by creation of avatars
         
         for index in 1...3 {
             switch index {
@@ -220,7 +215,7 @@ class Game {
             default:
                 break
             }
-
+            
             let avatarType = fillUpAvatarType(team: team, avatarNumber: avatarNumber)
             
             let avatarName = askUserForAvatarName()
@@ -231,20 +226,19 @@ class Game {
             
         }
     }
-
-/*    function to selection type of avatar
-        a check is done to verify that team contains at least one fighter not only magus
-            call function checkForMagus
-        return type of avatar to create
-*/
+    
+    /*    function to selection type of avatar
+     a check is done to verify that team contains at least one fighter not only magus
+     call function checkForMagus
+     return type of avatar to create
+     */
     private func fillUpAvatarType(team: Team,  avatarNumber: String) ->   AvatarType {
-        var answer: Int                        // number of answer
-        let teamNameDisplay = team.teamName    // name of team concerned
-        let avatarNumber = avatarNumber        // number of avatar
-        var avatarType: AvatarType!            // type of avatar created by fucntion
+        
+        var answerAvatarType: Int                       // number of answer
+        var avatarType: AvatarType!                     // type of avatar created by fucntion
         
         print("")
-        print("Equipe \(teamNameDisplay), Choississez votre \(avatarNumber) personnage")
+        print("Equipe \(team.teamName ), Choississez votre \(avatarNumber) personnage")
         
         repeat {
             print("""
@@ -254,15 +248,15 @@ class Game {
                 4 Nain
                 5 Hypnotiseur
             """)
-            answer = inputInteger()
-            switch answer {
+            answerAvatarType = inputInteger()
+            switch answerAvatarType {
             case 1:
                 avatarType = Fighter()
             case 2:
                 switch avatarNumber {
                 case "troisième":
                     if team.checkForMagus() {
-                        answer = 0
+                        answerAvatarType = 0
                         print(Errors.teamMagusOnly.rawValue)
                     } else {
                         avatarType = Magus()
@@ -280,60 +274,61 @@ class Game {
                 print("")
                 print(Errors.selectFighter.rawValue)
             }
-        } while answer < 1 || answer > 5
+        } while answerAvatarType < 1 || answerAvatarType > 5
         return avatarType!
     }
-
-/*    function to name avatar by asking to user
-        a check is done to verify that avatar's name is single for both teams
-            if teamA exist
-                call function checkForDuplicate for search in teamA
-                if no duplicate avatar name
-                    if teamB exist
-                        call function checkForDuplicate for search in teamB
-            if name duplicate
-                print error
-        return name of avatar
-*/
+    
+    /*    function to name avatar by asking to user
+     a check is done to verify that avatar's name is single for both teams
+     if teamA exist
+     call function checkForDuplicate for search in teamA
+     if no duplicate avatar name
+     if teamB exist
+     call function checkForDuplicate for search in teamB
+     if name duplicate
+     print error
+     return name of avatar
+     */
     private func askUserForAvatarName() -> String {
-        var avatarName: String                 // name of avatar done by player
-        var checkForDuplicates = true          // false when duplicate name found
+        
+        var avatarName: String                      // name of avatar done by player
+        var isAvatarNameDuplicate = false           // true when duplicate name found
         
         print("")
         print("Veuillez nommer votre Personnage")
         
         repeat {
             avatarName = inputString()
-            if teamA != nil {
-                checkForDuplicates = teamA!.checkForDuplicate(avatarName: avatarName)
-            }
-            if checkForDuplicates == true {
+
+            isAvatarNameDuplicate = teamA!.checkForDuplicateAvatarName(avatarName: avatarName)
+            
+            if isAvatarNameDuplicate == false {
                 if teamB != nil {
-                    checkForDuplicates = teamB!.checkForDuplicate(avatarName: avatarName)
+                    isAvatarNameDuplicate = teamB!.checkForDuplicateAvatarName(avatarName: avatarName)
                 }
             }
-            if checkForDuplicates == false {
+            if isAvatarNameDuplicate == true {
                 // Gestion d'erreur
                 print("")
                 print(Errors.avatarNameAllReadyExist.rawValue)
             }
-        } while checkForDuplicates == false
+        } while isAvatarNameDuplicate == true
         
         return avatarName
     }
     
-//    MARK: group fight function
-/*    funtion to launch game
-        is executed while a winner has not been declared
-            call function changeTeamToPlay to alternate attacker between teamA and teamB
-            call function choiceAttackOrCare to choose between attack or care
-            depending on return of function choiceAttackOrCare
-                attack
-                    call function attack
-                        return name of winner when a team won
-                care
-                    call function careChoice
-*/
+    //    MARK: group fight function
+    /*    funtion to launch game
+     is executed while a winner has not been declared
+     call function changeTeamToPlay to alternate attacker between teamA and teamB
+     call function choiceAttackOrCare to choose between attack or care
+     depending on return of function choiceAttackOrCare
+     attack
+     call function attack
+     return name of winner when a team won
+     care
+     call function chooseCare
+     */
     private func launchFight() {
         
         var winner: String = ""                // name of winner come from function attack
@@ -347,18 +342,18 @@ class Game {
             case "attack":
                 winner = ((teamAttacker?.attack(teamAgainst : teamAttacked!))!)
             case "care":
-                teamAttacker?.careChoice()
+                teamAttacker?.chooseCare()
             default:
                 break
             }
         }
         print(winner)
     }
-
-/*    function to alternate player betweem teamA and teamB
-        alternatively
-            teamToPlay contains team attacker : teamAttacker
-            teamNotToPlay contains team attacked : teamAttacked
+    
+    /*    function to alternate player betweem teamA and teamB
+     alternatively
+     teamToPlay contains team attacker : teamAttacker
+     teamNotToPlay contains team attacked : teamAttacked
      */
     fileprivate func changeTeamToPlay() {
         if teamAttacker === teamA! {
@@ -369,31 +364,31 @@ class Game {
             teamAttacked = teamB!
         }
     }
-
-/*    function to choice between attack or care
-        call function checkTeamMagusAlive to detrmine if Magus alive
-        call function checkTeamAvatarInjure to determione if at least one fighter is injured
-        If magus alive and avatarsInjured
-            --> care is possible
-                proposal to player to choose between care or attack
-                    depending on answer
-                        1 -> return attack
-                        2 -> return "care"
-            otherwise
-            --> attack only
-                return "attack"
-*/
+    
+    /*    function to choice between attack or care
+     call function checkTeamMagusAlive to detrmine if Magus alive
+     call function checkTeamAvatarInjure to determione if at least one fighter is injured
+     If magus alive and avatarsInjured
+     --> care is possible
+     proposal to player to choose between care or attack
+     depending on answer
+     1 -> return attack
+     2 -> return "care"
+     otherwise
+     --> attack only
+     return "attack"
+     */
     fileprivate func choiceAttackOrCare(teamToPlay: Team) -> String {
         
-        let teamToPlay = teamToPlay            // team Attacker
-        var choiceUser: Int                    // choice
-        var returnChoice: String = ""          //
+        let teamToPlay = teamToPlay                     // team Attacker
+        var choiceUser: Int                             // choice
+        var returnChoice: String = "attack"             // return Attack or Care depending on choice of player
         
-        let magusAlive = teamToPlay.checkTeamMagusAlive()
+        let isMagusAlive = teamToPlay.checkTeamMagusAlive()
         
-        let avatarInjured = teamToPlay.checkTeamAvatarInjure()
+        let isAvatarInjured = teamToPlay.checkTeamAvatarInjure()
         
-        if avatarInjured == true && magusAlive == true {
+        if isAvatarInjured == true && isMagusAlive == true {
             repeat {
                 print("""
                     
@@ -415,53 +410,42 @@ class Game {
             } while choiceUser != 1 && choiceUser != 2
             return returnChoice
         } else {
-            return "attack"
+            return returnChoice
         }
     }
     
-//    MARK: group readline function
-/*    function allowing at player to fill an Integer
-        executed until an integer has been filled
+    //    MARK: group readline function
+    /*    function allowing at player to fill an Integer
+     executed until an integer has been filled
      */
     fileprivate func inputInteger() -> Int {
-        var strIntReturn: Int = 0
         
-        if let strData1 = readLine() {
-            if let int = Int(strData1)
-            {
-                strIntReturn = int
-            } else {
-                print(Errors.selectANumber.rawValue)
-                print("")
-            }
+        guard let stringRead = readLine(), let numberToReturn = Int(stringRead) else {
+            print(Errors.selectANumber.rawValue)
+            print("")
+            return 0
         }
-        return Int(strIntReturn)
+        return numberToReturn
     }
     
-/*    function allowing at player to fill a String
-        executed until a not empty answer has been filled
+    /*    function allowing at player to fill a String
+     executed until a not empty answer has been filled
      */
     fileprivate func inputString() -> String {
-        var stringReturn: String = ""
-        var inputOk: Bool
         
+        var stringToReturn: String = ""
         repeat {
-            inputOk = true
-            if let strData2 = readLine() {
-                let processed = String(strData2.filter { !" ".contains($0) })
-                if processed.count == 0 {
-                    // print error message
-                    print("")
+            guard let stringRead = readLine(), !stringRead.isEmpty
+                else {
                     print(Errors.nameEmpty.rawValue)
-                    inputOk = false
-                } else {
-                    stringReturn = strData2
-                    inputOk = true
-                }
+                    print("")
+                    stringToReturn = ""
+                    continue
             }
-        } while inputOk == false
+            stringToReturn = stringRead
+        } while stringToReturn == ""
         
-        return (stringReturn)
+        return stringToReturn
     }
     
 }
