@@ -14,7 +14,7 @@
   */
 class Weapon {
     var damage: Int
-    var weaponName: String
+    let weaponName: String
     
     init(damage: Int, weaponName: String) {
         self.damage = damage

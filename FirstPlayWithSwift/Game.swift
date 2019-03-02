@@ -146,6 +146,11 @@ class Game {
         let teamAName = askUserForTeamName(teamNumber: "Premier")
 
         teamA = createTeam(name: teamAName)
+        
+        if teamA == nil {
+            print("Première \(Errors.teamEmpty.rawValue)")
+            fatalError()
+        }
 
         createFightersForTeam(team: teamA!)
         
@@ -157,7 +162,12 @@ class Game {
         let teamBName = askUserForTeamName(teamNumber: "Deuxième")
 
         teamB = createTeam(name: teamBName)
-
+        
+        if teamB == nil {
+            print("Deuxième \(Errors.teamEmpty.rawValue)")
+            fatalError()
+        }
+        
         createFightersForTeam(team: teamB!)
         
         print("")
